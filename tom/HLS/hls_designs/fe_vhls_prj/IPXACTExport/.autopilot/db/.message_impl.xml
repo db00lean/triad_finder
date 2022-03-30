@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Messages>
+	<Message severity="INFO" prefix="[IMPL 213-8]" key="IMPL_8_1776" tag="" content="Exporting RTL as a Vivado IP."/>
+	<Message severity="INFO" prefix="[HLS 200-10]" key="HLS_10_1303" tag="" content="Opening project &apos;Z:/FPGA/project/triad_finder/tom/HLS/hls_designs/be_vhls_prj&apos;."/>
+	<Message severity="INFO" prefix="[HLS 200-10]" key="HLS_10_1358" tag="" content="Adding design file &apos;xfft2real.cpp&apos; to the project"/>
+	<Message severity="INFO" prefix="[HLS 200-10]" key="HLS_10_1358" tag="" content="Adding test bench file &apos;real2xfft.cpp&apos; to the project"/>
+	<Message severity="INFO" prefix="[HLS 200-10]" key="HLS_10_1358" tag="" content="Adding test bench file &apos;hls_realfft_test.cpp&apos; to the project"/>
+</Messages>

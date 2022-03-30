@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<autopilotfilemapping:AutoPilotFileMapping xmlns:autopilotfilemapping="www.autoesl.com/autopilotfilemapping">
+  <source>
+    <originFiles name="xfft2real.cpp" path="Z:\FPGA\project\triad_finder\tom\HLS\hls_designs\xfft2real.cpp"/>
+  </source>
+  <testbench>
+    <originFiles name="hls_realfft_test.cpp" path="Z:\FPGA\project\triad_finder\tom\HLS\hls_designs\hls_realfft_test.cpp"/>
+    <originFiles name="real2xfft.cpp" path="Z:\FPGA\project\triad_finder\tom\HLS\hls_designs\real2xfft.cpp"/>
+  </testbench>
+</autopilotfilemapping:AutoPilotFileMapping>

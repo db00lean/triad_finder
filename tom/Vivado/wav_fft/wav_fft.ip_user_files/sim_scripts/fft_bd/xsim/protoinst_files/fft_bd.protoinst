@@ -1,0 +1,73 @@
+{
+	"version": "1.0",
+	"modules": {
+		"fft_bd": {
+			"proto_instances": {
+				"/hls_real2xfft_0/din_V_V": {
+					"interface": "xilinx.com:interface:axis:1.0",
+					"ports": {
+						"ACLK": { "actual": "ap_clk"},
+						"ARESETN": { "actual": "ap_rst_n"},
+						"TDATA": { "actual": "din_V_V_TDATA"},
+						"TREADY": { "actual": "din_V_V_TREADY"},
+						"TVALID": { "actual": "din_V_V_TVALID"}
+					}
+				},
+				"/hls_real2xfft_0/dout": {
+					"interface": "xilinx.com:interface:axis:1.0",
+					"ports": {
+						"ACLK": { "actual": "ap_clk"},
+						"ARESETN": { "actual": "ap_rst_n"},
+						"TDATA": { "actual": "dout_TDATA"},
+						"TLAST": { "actual": "dout_TLAST"},
+						"TREADY": { "actual": "dout_TREADY"},
+						"TVALID": { "actual": "dout_TVALID"}
+					}
+				},
+				"/hls_xfft2real_0/din": {
+					"interface": "xilinx.com:interface:axis:1.0",
+					"ports": {
+						"ACLK": { "actual": "ap_clk"},
+						"ARESETN": { "actual": "ap_rst_n"},
+						"TDATA": { "actual": "din_TDATA"},
+						"TLAST": { "actual": "din_TLAST"},
+						"TREADY": { "actual": "din_TREADY"},
+						"TVALID": { "actual": "din_TVALID"}
+					}
+				},
+				"/hls_xfft2real_0/dout_V": {
+					"interface": "xilinx.com:interface:axis:1.0",
+					"ports": {
+						"ACLK": { "actual": "ap_clk"},
+						"ARESETN": { "actual": "ap_rst_n"},
+						"TDATA": { "actual": "dout_V_TDATA"},
+						"TREADY": { "actual": "dout_V_TREADY"},
+						"TVALID": { "actual": "dout_V_TVALID"}
+					}
+				},
+				"/xfft_0/M_AXIS_DATA": {
+					"interface": "xilinx.com:interface:axis:1.0",
+					"ports": {
+						"ACLK": { "actual": "aclk"},
+						"ARESETN": { "actual": "aresetn"},
+						"TDATA": { "actual": "m_axis_data_tdata"},
+						"TLAST": { "actual": "m_axis_data_tlast"},
+						"TREADY": { "actual": "m_axis_data_tready"},
+						"TVALID": { "actual": "m_axis_data_tvalid"}
+					}
+				},
+				"/xfft_0/S_AXIS_DATA": {
+					"interface": "xilinx.com:interface:axis:1.0",
+					"ports": {
+						"ACLK": { "actual": "aclk"},
+						"ARESETN": { "actual": "aresetn"},
+						"TDATA": { "actual": "s_axis_data_tdata"},
+						"TLAST": { "actual": "s_axis_data_tlast"},
+						"TREADY": { "actual": "s_axis_data_tready"},
+						"TVALID": { "actual": "s_axis_data_tvalid"}
+					}
+				}
+			}
+		}
+	}
+}

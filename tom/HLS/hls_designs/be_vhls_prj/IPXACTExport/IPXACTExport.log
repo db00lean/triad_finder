@@ -1,0 +1,287 @@
+==============================================================
+Vivado(TM) HLS - High-Level Synthesis from C, C++ and SystemC v2020.1 (64-bit)
+Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+==============================================================
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 4ns.
+INFO: [SCHED 204-61] Option 'relax_ii_for_timing' is enabled, will increase II to preserve clock frequency constraints.
+INFO: [HLS 200-10] Analyzing design file 'xfft2real.cpp' ... 
+INFO: [HLS 200-111] Finished Linking Time (s): cpu = 00:00:21 ; elapsed = 00:05:41 . Memory (MB): peak = 934.746 ; gain = 863.047
+INFO: [HLS 200-111] Finished Checking Pragmas Time (s): cpu = 00:00:21 ; elapsed = 00:05:41 . Memory (MB): peak = 934.746 ; gain = 863.047
+INFO: [HLS 200-10] Starting code transformations ...
+INFO: [XFORM 203-603] Inlining function 'xfft2real<std::complex<ap_fixed<16, 1, (ap_q_mode)5, (ap_o_mode)3, 0> >, std::complex<ap_fixed<16, 1, (ap_q_mode)5, (ap_o_mode)3, 0> >, 10, true>' into 'hls_xfft2real' (xfft2real.cpp:60).
+INFO: [HLS 200-111] Finished Standard Transforms Time (s): cpu = 00:00:29 ; elapsed = 00:05:52 . Memory (MB): peak = 934.746 ; gain = 863.047
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO: [XFORM 203-602] Inlining function 'std::complex<ap_fixed<16, 1, (ap_q_mode)5, (ap_o_mode)3, 0> >::operator*=<ap_fixed<16, 1, (ap_q_mode)5, (ap_o_mode)3, 0> >' into 'std::operator*<ap_fixed<16, 1, (ap_q_mode)5, (ap_o_mode)3, 0> >' () automatically.
+INFO: [XFORM 203-602] Inlining function 'std::complex<ap_fixed<16, 1, (ap_q_mode)5, (ap_o_mode)3, 0> >::operator+=<ap_fixed<16, 1, (ap_q_mode)5, (ap_o_mode)3, 0> >' into 'std::operator+<ap_fixed<16, 1, (ap_q_mode)5, (ap_o_mode)3, 0> >' () automatically.
+INFO: [HLS 200-111] Finished Checking Synthesizability Time (s): cpu = 00:00:29 ; elapsed = 00:05:52 . Memory (MB): peak = 934.746 ; gain = 863.047
+INFO: [XFORM 203-1101] Packing variable 'din.V.data' (xfft2real.cpp:51) into a 32-bit variable.
+INFO: [XFORM 203-1101] Packing variable 'dout.V' (xfft2real.cpp:52) into a 32-bit variable.
+INFO: [XFORM 203-101] Partitioning array 'descramble_buf._M_real.V' (./xfft2real.h:63) in dimension 1 with a block factor 2.
+INFO: [XFORM 203-101] Partitioning array 'descramble_buf._M_imag.V' (./xfft2real.h:63) in dimension 1 with a block factor 2.
+INFO: [XFORM 203-602] Inlining function 'std::complex<ap_fixed<16, 1, (ap_q_mode)5, (ap_o_mode)3, 0> >::operator*=<ap_fixed<16, 1, (ap_q_mode)5, (ap_o_mode)3, 0> >' into 'std::operator*<ap_fixed<16, 1, (ap_q_mode)5, (ap_o_mode)3, 0> >' () automatically.
+INFO: [XFORM 203-602] Inlining function 'std::complex<ap_fixed<16, 1, (ap_q_mode)5, (ap_o_mode)3, 0> >::operator+=<ap_fixed<16, 1, (ap_q_mode)5, (ap_o_mode)3, 0> >' into 'std::operator+<ap_fixed<16, 1, (ap_q_mode)5, (ap_o_mode)3, 0> >' () automatically.
+WARNING: [ANALYSIS 214-31] The program may have out of bound access of array variable 'descramble_buf[0]._M_real.V' in function 'hls_xfft2real' (./xfft2real.h:99:27).
+WARNING: [ANALYSIS 214-31] The program may have out of bound access of array variable 'descramble_buf[1]._M_real.V' in function 'hls_xfft2real' (./xfft2real.h:99:27).
+WARNING: [ANALYSIS 214-31] The program may have out of bound access of array variable 'descramble_buf[0]._M_imag.V' in function 'hls_xfft2real' (./xfft2real.h:99:27).
+WARNING: [ANALYSIS 214-31] The program may have out of bound access of array variable 'descramble_buf[1]._M_imag.V' in function 'hls_xfft2real' (./xfft2real.h:99:27).
+INFO: [XFORM 203-721] Changing loop 'Loop_realfft_be_buffer_proc' (./xfft2real.h:71) to a process function for dataflow in function 'hls_xfft2real'.
+INFO: [XFORM 203-721] Changing loop 'Loop_realfft_be_descramble_proc' (./xfft2real.h:80) to a process function for dataflow in function 'hls_xfft2real'.
+WARNING: [XFORM 203-713] All the elements of global array 'descramble_buf[0]._M_imag.V'  should be updated in process function 'Loop_realfft_be_buffer_proc62', otherwise it may not be synthesized correctly.
+WARNING: [XFORM 203-713] All the elements of global array 'descramble_buf[1]._M_imag.V'  should be updated in process function 'Loop_realfft_be_buffer_proc62', otherwise it may not be synthesized correctly.
+WARNING: [XFORM 203-713] All the elements of global array 'descramble_buf[0]._M_real.V'  should be updated in process function 'Loop_realfft_be_buffer_proc62', otherwise it may not be synthesized correctly.
+WARNING: [XFORM 203-713] All the elements of global array 'descramble_buf[1]._M_real.V'  should be updated in process function 'Loop_realfft_be_buffer_proc62', otherwise it may not be synthesized correctly.
+INFO: [XFORM 203-712] Applying dataflow to function 'hls_xfft2real', detected/extracted 2 process function(s): 
+	 'Loop_realfft_be_buffer_proc62'
+	 'Loop_realfft_be_descramble_proc63'.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (./xfft2real.h:80:43) to (./xfft2real.h:101:7) in function 'Loop_realfft_be_descramble_proc63'... converting 7 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (./xfft2real.h:104:18) in function 'Loop_realfft_be_descramble_proc63'... converting 7 basic blocks.
+INFO: [XFORM 203-602] Inlining function 'std::conj<ap_fixed<16, 1, (ap_q_mode)5, (ap_o_mode)3, 0> >' into 'Loop_realfft_be_descramble_proc63' (./xfft2real.h:104->xfft2real.cpp:60) automatically.
+INFO: [XFORM 203-602] Inlining function 'std::operator*<ap_fixed<16, 1, (ap_q_mode)5, (ap_o_mode)3, 0> >' into 'Loop_realfft_be_descramble_proc63' (./xfft2real.h:108->xfft2real.cpp:60) automatically.
+INFO: [XFORM 203-602] Inlining function 'std::operator+<ap_fixed<16, 1, (ap_q_mode)5, (ap_o_mode)3, 0> >' into 'Loop_realfft_be_descramble_proc63' (./xfft2real.h:109->xfft2real.cpp:60) automatically.
+INFO: [HLS 200-111] Finished Pre-synthesis Time (s): cpu = 00:00:30 ; elapsed = 00:05:54 . Memory (MB): peak = 934.746 ; gain = 863.047
+WARNING: [XFORM 203-631] Renaming function 'Loop_realfft_be_descramble_proc63' to 'Loop_realfft_be_desc' (./xfft2real.h:80:37)
+WARNING: [XFORM 203-631] Renaming function 'Loop_realfft_be_buffer_proc62' to 'Loop_realfft_be_buff' (./xfft2real.h:63)
+INFO: [HLS 200-472] Inferring partial write operation for 'descramble_buf[0]._M_imag.V' (./xfft2real.h:77:22)
+INFO: [XFORM 203-531] Rewinding loop 'realfft_be_buffer' (./xfft2real.h:71) in function 'Loop_realfft_be_buff'.
+WARNING: [XFORM 203-561] Ignored multiple trip count directives for loop 'realfft_be_buffer' in function 'Loop_realfft_be_buff'.
+INFO: [HLS 200-111] Finished Architecture Synthesis Time (s): cpu = 00:00:30 ; elapsed = 00:05:54 . Memory (MB): peak = 934.746 ; gain = 863.047
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO: [HLS 200-10] Synthesizing 'hls_xfft2real' ...
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'Loop_realfft_be_buff' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'realfft_be_buffer'.
+INFO: [SCHED 204-61] Pipelining result : Target II = 1, Final II = 1, Depth = 1.
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 253.719 seconds; current allocated memory: 335.661 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 0.496 seconds; current allocated memory: 335.797 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'Loop_realfft_be_desc' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'realfft_be_descramble'.
+INFO: [SCHED 204-61] Pipelining result : Target II = 1, Final II = 1, Depth = 13.
+WARNING: [SCHED 204-21] Estimated clock period (3.89ns) exceeds the target (target clock period: 4ns, clock uncertainty: 0.5ns, effective delay budget: 3.5ns).
+WARNING: [SCHED 204-21] The critical path in module 'Loop_realfft_be_desc' consists of the following:
+	'mul' operation of DSP[98] ('mul_ln700', ./xfft2real.h:108->xfft2real.cpp:60) [98]  (3.89 ns)
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 0.765 seconds; current allocated memory: 336.117 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 0.981 seconds; current allocated memory: 336.589 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'hls_xfft2real' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 1.176 seconds; current allocated memory: 336.642 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 0.422 seconds; current allocated memory: 336.721 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'Loop_realfft_be_buff' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'Loop_realfft_be_buff'.
+INFO: [HLS 200-111]  Elapsed time: 0.626 seconds; current allocated memory: 336.935 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'Loop_realfft_be_desc' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SYN 201-210] Renamed object name 'Loop_realfft_be_desc_twid_rom_0' to 'Loop_realfft_be_dbkb' due to the length limit 20
+INFO: [SYN 201-210] Renamed object name 'Loop_realfft_be_desc_twid_rom_1' to 'Loop_realfft_be_dcud' due to the length limit 20
+INFO: [SYN 201-210] Renamed object name 'hls_xfft2real_mul_mul_16s_16s_31_3_1' to 'hls_xfft2real_muldEe' due to the length limit 20
+INFO: [SYN 201-210] Renamed object name 'hls_xfft2real_mac_mulsub_16s_16s_31s_31_3_1' to 'hls_xfft2real_maceOg' due to the length limit 20
+INFO: [SYN 201-210] Renamed object name 'hls_xfft2real_mac_muladd_16s_16s_31s_31_3_1' to 'hls_xfft2real_macfYi' due to the length limit 20
+INFO: [RTGEN 206-100] Generating core module 'hls_xfft2real_maceOg': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'hls_xfft2real_macfYi': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'hls_xfft2real_muldEe': 2 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'Loop_realfft_be_desc'.
+INFO: [HLS 200-111]  Elapsed time: 1.776 seconds; current allocated memory: 338.497 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'hls_xfft2real' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-500] Setting interface mode on port 'hls_xfft2real/din_V_data' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'hls_xfft2real/din_V_last_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'hls_xfft2real/dout_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on function 'hls_xfft2real' to 'ap_ctrl_hs'.
+INFO: [SYN 201-210] Renamed object name 'hls_xfft2real_descramble_buf_0_M' to 'hls_xfft2real_desg8j' due to the length limit 20
+INFO: [SYN 201-210] Renamed object name 'hls_xfft2real_descramble_buf_1_M' to 'hls_xfft2real_deshbi' due to the length limit 20
+INFO: [SYN 201-210] Renamed object name 'hls_xfft2real_descramble_buf_0_M_1' to 'hls_xfft2real_desibs' due to the length limit 20
+INFO: [SYN 201-210] Renamed object name 'hls_xfft2real_descramble_buf_1_M_1' to 'hls_xfft2real_desjbC' due to the length limit 20
+INFO: [RTGEN 206-100] Finished creating RTL model for 'hls_xfft2real'.
+INFO: [HLS 200-111]  Elapsed time: 4.268 seconds; current allocated memory: 340.634 MB.
+INFO: [HLS 200-790] **** Loop Constraint Status: All loop constraints were satisfied.
+INFO: [HLS 200-789] **** Estimated Fmax: 257.07 MHz
+INFO: [RTMG 210-279] Implementing memory 'Loop_realfft_be_dbkb_rom' using auto ROMs.
+INFO: [RTMG 210-279] Implementing memory 'Loop_realfft_be_dcud_rom' using auto ROMs.
+INFO: [HLS 200-740] Implementing PIPO hls_xfft2real_desg8j_memcore using a separate memory for each block
+INFO: [RTMG 210-278] Implementing memory 'hls_xfft2real_desg8j_memcore_ram (RAM)' using block RAMs.
+INFO: [HLS 200-740] Implementing PIPO hls_xfft2real_desg8j_memcore using a separate memory for each block
+INFO: [HLS 200-740] Implementing PIPO hls_xfft2real_desg8j_memcore using a separate memory for each block
+INFO: [HLS 200-111] Finished generating all RTL models Time (s): cpu = 00:00:34 ; elapsed = 00:06:28 . Memory (MB): peak = 934.746 ; gain = 863.047
+INFO: [VHDL 208-304] Generating VHDL RTL for hls_xfft2real.
+INFO: [VLOG 209-307] Generating Verilog RTL for hls_xfft2real.
+INFO: [IMPL 213-8] Exporting RTL as a Vivado IP.
+INFO: [HLS 200-740] Implementing PIPO hls_xfft2real_desg8j_memcore using a separate memory for each block
+INFO: [HLS 200-740] Implementing PIPO hls_xfft2real_desg8j_memcore using a separate memory for each block
+INFO: [HLS 200-112] Total elapsed time: 424.022 seconds; peak allocated memory: 340.634 MB.
+INFO: [Common 17-206] Exiting vivado_hls at Mon Mar 21 15:22:47 2022...
+==============================================================
+Vivado(TM) HLS - High-Level Synthesis from C, C++ and SystemC v2020.1 (64-bit)
+Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+==============================================================
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 4ns.
+INFO: [HLS 200-10] Setting target device to 'xc7z020-clg484-1'
+INFO: [IMPL 213-8] Exporting RTL as a Vivado IP.
+INFO: [HLS 200-740] Implementing PIPO hls_xfft2real_desg8j_memcore using a separate memory for each block
+INFO: [HLS 200-740] Implementing PIPO hls_xfft2real_desg8j_memcore using a separate memory for each block
+==============================================================
+Vivado(TM) HLS - High-Level Synthesis from C, C++ and SystemC v2020.1 (64-bit)
+Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+==============================================================
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 4ns.
+INFO: [SCHED 204-61] Option 'relax_ii_for_timing' is enabled, will increase II to preserve clock frequency constraints.
+INFO: [HLS 200-10] Analyzing design file 'xfft2real.cpp' ... 
+INFO: [HLS 200-111] Finished Linking Time (s): cpu = 00:00:22 ; elapsed = 00:04:52 . Memory (MB): peak = 955.801 ; gain = 862.562
+INFO: [HLS 200-111] Finished Checking Pragmas Time (s): cpu = 00:00:22 ; elapsed = 00:04:52 . Memory (MB): peak = 955.801 ; gain = 862.562
+INFO: [HLS 200-10] Starting code transformations ...
+INFO: [XFORM 203-603] Inlining function 'xfft2real<std::complex<ap_fixed<16, 1, (ap_q_mode)5, (ap_o_mode)3, 0> >, std::complex<ap_fixed<16, 1, (ap_q_mode)5, (ap_o_mode)3, 0> >, 10, true>' into 'hls_xfft2real' (xfft2real.cpp:60).
+INFO: [HLS 200-111] Finished Standard Transforms Time (s): cpu = 00:00:30 ; elapsed = 00:05:02 . Memory (MB): peak = 955.801 ; gain = 862.562
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO: [XFORM 203-602] Inlining function 'std::complex<ap_fixed<16, 1, (ap_q_mode)5, (ap_o_mode)3, 0> >::operator*=<ap_fixed<16, 1, (ap_q_mode)5, (ap_o_mode)3, 0> >' into 'std::operator*<ap_fixed<16, 1, (ap_q_mode)5, (ap_o_mode)3, 0> >' () automatically.
+INFO: [XFORM 203-602] Inlining function 'std::complex<ap_fixed<16, 1, (ap_q_mode)5, (ap_o_mode)3, 0> >::operator+=<ap_fixed<16, 1, (ap_q_mode)5, (ap_o_mode)3, 0> >' into 'std::operator+<ap_fixed<16, 1, (ap_q_mode)5, (ap_o_mode)3, 0> >' () automatically.
+INFO: [HLS 200-111] Finished Checking Synthesizability Time (s): cpu = 00:00:30 ; elapsed = 00:05:02 . Memory (MB): peak = 955.801 ; gain = 862.562
+INFO: [XFORM 203-1101] Packing variable 'din.V.data' (xfft2real.cpp:51) into a 32-bit variable.
+INFO: [XFORM 203-1101] Packing variable 'dout.V' (xfft2real.cpp:52) into a 32-bit variable.
+INFO: [XFORM 203-101] Partitioning array 'descramble_buf._M_real.V' (./xfft2real.h:63) in dimension 1 with a block factor 2.
+INFO: [XFORM 203-101] Partitioning array 'descramble_buf._M_imag.V' (./xfft2real.h:63) in dimension 1 with a block factor 2.
+INFO: [XFORM 203-602] Inlining function 'std::complex<ap_fixed<16, 1, (ap_q_mode)5, (ap_o_mode)3, 0> >::operator*=<ap_fixed<16, 1, (ap_q_mode)5, (ap_o_mode)3, 0> >' into 'std::operator*<ap_fixed<16, 1, (ap_q_mode)5, (ap_o_mode)3, 0> >' () automatically.
+INFO: [XFORM 203-602] Inlining function 'std::complex<ap_fixed<16, 1, (ap_q_mode)5, (ap_o_mode)3, 0> >::operator+=<ap_fixed<16, 1, (ap_q_mode)5, (ap_o_mode)3, 0> >' into 'std::operator+<ap_fixed<16, 1, (ap_q_mode)5, (ap_o_mode)3, 0> >' () automatically.
+WARNING: [ANALYSIS 214-31] The program may have out of bound access of array variable 'descramble_buf[0]._M_real.V' in function 'hls_xfft2real' (./xfft2real.h:99:27).
+WARNING: [ANALYSIS 214-31] The program may have out of bound access of array variable 'descramble_buf[1]._M_real.V' in function 'hls_xfft2real' (./xfft2real.h:99:27).
+WARNING: [ANALYSIS 214-31] The program may have out of bound access of array variable 'descramble_buf[0]._M_imag.V' in function 'hls_xfft2real' (./xfft2real.h:99:27).
+WARNING: [ANALYSIS 214-31] The program may have out of bound access of array variable 'descramble_buf[1]._M_imag.V' in function 'hls_xfft2real' (./xfft2real.h:99:27).
+INFO: [XFORM 203-721] Changing loop 'Loop_realfft_be_buffer_proc' (./xfft2real.h:71) to a process function for dataflow in function 'hls_xfft2real'.
+INFO: [XFORM 203-721] Changing loop 'Loop_realfft_be_descramble_proc' (./xfft2real.h:80) to a process function for dataflow in function 'hls_xfft2real'.
+WARNING: [XFORM 203-713] All the elements of global array 'descramble_buf[0]._M_imag.V'  should be updated in process function 'Loop_realfft_be_buffer_proc62', otherwise it may not be synthesized correctly.
+WARNING: [XFORM 203-713] All the elements of global array 'descramble_buf[1]._M_imag.V'  should be updated in process function 'Loop_realfft_be_buffer_proc62', otherwise it may not be synthesized correctly.
+WARNING: [XFORM 203-713] All the elements of global array 'descramble_buf[0]._M_real.V'  should be updated in process function 'Loop_realfft_be_buffer_proc62', otherwise it may not be synthesized correctly.
+WARNING: [XFORM 203-713] All the elements of global array 'descramble_buf[1]._M_real.V'  should be updated in process function 'Loop_realfft_be_buffer_proc62', otherwise it may not be synthesized correctly.
+INFO: [XFORM 203-712] Applying dataflow to function 'hls_xfft2real', detected/extracted 2 process function(s): 
+	 'Loop_realfft_be_buffer_proc62'
+	 'Loop_realfft_be_descramble_proc63'.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (./xfft2real.h:80:43) to (./xfft2real.h:101:7) in function 'Loop_realfft_be_descramble_proc63'... converting 7 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (./xfft2real.h:104:18) in function 'Loop_realfft_be_descramble_proc63'... converting 7 basic blocks.
+INFO: [XFORM 203-602] Inlining function 'std::conj<ap_fixed<16, 1, (ap_q_mode)5, (ap_o_mode)3, 0> >' into 'Loop_realfft_be_descramble_proc63' (./xfft2real.h:104->xfft2real.cpp:60) automatically.
+INFO: [XFORM 203-602] Inlining function 'std::operator*<ap_fixed<16, 1, (ap_q_mode)5, (ap_o_mode)3, 0> >' into 'Loop_realfft_be_descramble_proc63' (./xfft2real.h:108->xfft2real.cpp:60) automatically.
+INFO: [XFORM 203-602] Inlining function 'std::operator+<ap_fixed<16, 1, (ap_q_mode)5, (ap_o_mode)3, 0> >' into 'Loop_realfft_be_descramble_proc63' (./xfft2real.h:109->xfft2real.cpp:60) automatically.
+INFO: [HLS 200-111] Finished Pre-synthesis Time (s): cpu = 00:00:31 ; elapsed = 00:05:03 . Memory (MB): peak = 955.801 ; gain = 862.562
+WARNING: [XFORM 203-631] Renaming function 'Loop_realfft_be_descramble_proc63' to 'Loop_realfft_be_desc' (./xfft2real.h:80:37)
+WARNING: [XFORM 203-631] Renaming function 'Loop_realfft_be_buffer_proc62' to 'Loop_realfft_be_buff' (./xfft2real.h:63)
+INFO: [HLS 200-472] Inferring partial write operation for 'descramble_buf[0]._M_imag.V' (./xfft2real.h:77:22)
+INFO: [XFORM 203-531] Rewinding loop 'realfft_be_buffer' (./xfft2real.h:71) in function 'Loop_realfft_be_buff'.
+WARNING: [XFORM 203-561] Ignored multiple trip count directives for loop 'realfft_be_buffer' in function 'Loop_realfft_be_buff'.
+INFO: [HLS 200-111] Finished Architecture Synthesis Time (s): cpu = 00:00:31 ; elapsed = 00:05:04 . Memory (MB): peak = 955.801 ; gain = 862.562
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO: [HLS 200-10] Synthesizing 'hls_xfft2real' ...
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'Loop_realfft_be_buff' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'realfft_be_buffer'.
+INFO: [SCHED 204-61] Pipelining result : Target II = 1, Final II = 1, Depth = 1.
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 217.758 seconds; current allocated memory: 336.316 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 0.478 seconds; current allocated memory: 336.452 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'Loop_realfft_be_desc' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'realfft_be_descramble'.
+INFO: [SCHED 204-61] Pipelining result : Target II = 1, Final II = 1, Depth = 13.
+WARNING: [SCHED 204-21] Estimated clock period (3.89ns) exceeds the target (target clock period: 4ns, clock uncertainty: 0.5ns, effective delay budget: 3.5ns).
+WARNING: [SCHED 204-21] The critical path in module 'Loop_realfft_be_desc' consists of the following:
+	'mul' operation of DSP[98] ('mul_ln700', ./xfft2real.h:108->xfft2real.cpp:60) [98]  (3.89 ns)
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 0.72 seconds; current allocated memory: 336.772 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 0.908 seconds; current allocated memory: 337.244 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'hls_xfft2real' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 1.179 seconds; current allocated memory: 337.298 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 0.431 seconds; current allocated memory: 337.377 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'Loop_realfft_be_buff' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'Loop_realfft_be_buff'.
+INFO: [HLS 200-111]  Elapsed time: 0.606 seconds; current allocated memory: 337.622 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'Loop_realfft_be_desc' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SYN 201-210] Renamed object name 'Loop_realfft_be_desc_twid_rom_0' to 'Loop_realfft_be_dbkb' due to the length limit 20
+INFO: [SYN 201-210] Renamed object name 'Loop_realfft_be_desc_twid_rom_1' to 'Loop_realfft_be_dcud' due to the length limit 20
+INFO: [SYN 201-210] Renamed object name 'hls_xfft2real_mul_mul_16s_16s_31_3_1' to 'hls_xfft2real_muldEe' due to the length limit 20
+INFO: [SYN 201-210] Renamed object name 'hls_xfft2real_mac_mulsub_16s_16s_31s_31_3_1' to 'hls_xfft2real_maceOg' due to the length limit 20
+INFO: [SYN 201-210] Renamed object name 'hls_xfft2real_mac_muladd_16s_16s_31s_31_3_1' to 'hls_xfft2real_macfYi' due to the length limit 20
+INFO: [RTGEN 206-100] Generating core module 'hls_xfft2real_maceOg': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'hls_xfft2real_macfYi': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'hls_xfft2real_muldEe': 2 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'Loop_realfft_be_desc'.
+INFO: [HLS 200-111]  Elapsed time: 1.556 seconds; current allocated memory: 339.243 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'hls_xfft2real' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-500] Setting interface mode on port 'hls_xfft2real/din_V_data' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'hls_xfft2real/din_V_last_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'hls_xfft2real/dout_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on function 'hls_xfft2real' to 'ap_ctrl_hs'.
+INFO: [SYN 201-210] Renamed object name 'hls_xfft2real_descramble_buf_0_M' to 'hls_xfft2real_desg8j' due to the length limit 20
+INFO: [SYN 201-210] Renamed object name 'hls_xfft2real_descramble_buf_1_M' to 'hls_xfft2real_deshbi' due to the length limit 20
+INFO: [SYN 201-210] Renamed object name 'hls_xfft2real_descramble_buf_0_M_1' to 'hls_xfft2real_desibs' due to the length limit 20
+INFO: [SYN 201-210] Renamed object name 'hls_xfft2real_descramble_buf_1_M_1' to 'hls_xfft2real_desjbC' due to the length limit 20
+INFO: [RTGEN 206-100] Finished creating RTL model for 'hls_xfft2real'.
+INFO: [HLS 200-111]  Elapsed time: 3.341 seconds; current allocated memory: 341.351 MB.
+INFO: [HLS 200-790] **** Loop Constraint Status: All loop constraints were satisfied.
+INFO: [HLS 200-789] **** Estimated Fmax: 257.07 MHz
+INFO: [RTMG 210-279] Implementing memory 'Loop_realfft_be_dbkb_rom' using auto ROMs.
+INFO: [RTMG 210-279] Implementing memory 'Loop_realfft_be_dcud_rom' using auto ROMs.
+INFO: [HLS 200-740] Implementing PIPO hls_xfft2real_desg8j_memcore using a separate memory for each block
+INFO: [RTMG 210-278] Implementing memory 'hls_xfft2real_desg8j_memcore_ram (RAM)' using block RAMs.
+INFO: [HLS 200-740] Implementing PIPO hls_xfft2real_desg8j_memcore using a separate memory for each block
+INFO: [HLS 200-740] Implementing PIPO hls_xfft2real_desg8j_memcore using a separate memory for each block
+INFO: [HLS 200-111] Finished generating all RTL models Time (s): cpu = 00:00:34 ; elapsed = 00:05:31 . Memory (MB): peak = 955.801 ; gain = 862.562
+INFO: [VHDL 208-304] Generating VHDL RTL for hls_xfft2real.
+INFO: [VLOG 209-307] Generating Verilog RTL for hls_xfft2real.
+INFO: [IMPL 213-8] Exporting RTL as a Vivado IP.
+INFO: [HLS 200-740] Implementing PIPO hls_xfft2real_desg8j_memcore using a separate memory for each block
+INFO: [HLS 200-740] Implementing PIPO hls_xfft2real_desg8j_memcore using a separate memory for each block
+INFO: [HLS 200-112] Total elapsed time: 361.52 seconds; peak allocated memory: 341.351 MB.
+INFO: [Common 17-206] Exiting vivado_hls at Wed Mar 30 12:59:46 2022...

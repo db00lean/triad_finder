@@ -1,0 +1,35 @@
+{
+   "ActiveEmotionalView":"Default View",
+   "Default View_ScaleFactor":"0.62204",
+   "Default View_TopLeft":"-47,-96",
+   "ExpandedHierarchyInLayout":"",
+   "guistr":"# # String gsaved with Nlview 7.0r6  2020-01-29 bk=1.5227 VDI=41 GEI=36 GUI=JA:9.0 non-TLS
+#  -string -flagsOSRD
+preplace port real2xfft_din -pg 1 -lvl 0 -x 0 -y 120 -defaultsOSRD
+preplace port xfft2real_dout -pg 1 -lvl 5 -x 1450 -y 130 -defaultsOSRD
+preplace port DDR -pg 1 -lvl 5 -x 1450 -y 300 -defaultsOSRD
+preplace port FIXED_IO -pg 1 -lvl 5 -x 1450 -y 320 -defaultsOSRD
+preplace port aclk -pg 1 -lvl 0 -x 0 -y 240 -defaultsOSRD
+preplace port aresetn -pg 1 -lvl 0 -x 0 -y 260 -defaultsOSRD
+preplace inst xfft_0 -pg 1 -lvl 3 -x 840 -y 220 -defaultsOSRD
+preplace inst hls_real2xfft_0 -pg 1 -lvl 2 -x 510 -y 190 -defaultsOSRD
+preplace inst hls_xfft2real_0 -pg 1 -lvl 4 -x 1230 -y 130 -defaultsOSRD
+preplace inst xlconstant_0 -pg 1 -lvl 1 -x 190 -y 180 -defaultsOSRD
+preplace inst processing_system7_0 -pg 1 -lvl 4 -x 1230 -y 350 -defaultsOSRD
+preplace inst axi_dma_0 -pg 1 -lvl 1 -x 190 -y 420 -defaultsOSRD
+preplace netloc aclk_0_1 1 0 4 NJ 240 370 320 650 340 1020
+preplace netloc aresetn_0_1 1 0 4 NJ 260 360 330 660 350 1030
+preplace netloc xlconstant_0_dout 1 1 3 370 60 NJ 60 1020J
+preplace netloc xfft_0_M_AXIS_DATA 1 3 1 N 160
+preplace netloc din_V_V_0_1 1 0 2 NJ 120 NJ
+preplace netloc hls_real2xfft_0_dout 1 2 1 N 190
+preplace netloc hls_xfft2real_0_dout_V 1 4 1 NJ 130
+preplace netloc processing_system7_0_DDR 1 4 1 NJ 300
+preplace netloc processing_system7_0_FIXED_IO 1 4 1 NJ 320
+levelinfo -pg 1 0 190 510 840 1230 1450
+pagesize -pg 1 -db -bbox -sgen -130 0 1590 580
+"
+}
+{
+   "da_ps7_cnt":"1"
+}

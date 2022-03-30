@@ -1,0 +1,1010 @@
+#-----------------------------------------------------------
+# Vivado v2020.1 (64-bit)
+# SW Build 2902540 on Wed May 27 19:54:49 MDT 2020
+# IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
+# Start of session at: Wed Mar 30 12:47:43 2022
+# Process ID: 7724
+# Current directory: Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent5348 Z:\FPGA\project\triad_finder\tom\Vivado\wav_fft\wav_fft.xpr
+# Log file: Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/vivado.log
+# Journal file: Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.xpr
+INFO: [Project 1-313] Project file moved from 'Z:/FPGA/project/triad_finder/tom/wav_fft' since last save.
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2020.1/data/ip'.
+open_project: Time (s): cpu = 00:00:16 ; elapsed = 00:00:09 . Memory (MB): peak = 1036.836 ; gain = 0.000
+update_compile_order -fileset sources_1
+open_bd_design {Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/fft_bd.bd}
+Adding component instance block -- xilinx.com:ip:xfft:9.1 - xfft_0
+Successfully read diagram <fft_bd> from BD file <Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/fft_bd.bd>
+open_bd_design: Time (s): cpu = 00:00:09 ; elapsed = 00:00:05 . Memory (MB): peak = 1036.836 ; gain = 0.000
+set_property  ip_repo_paths  Z:/FPGA/project/triad_finder/tom/HLS [current_project]
+update_ip_catalog
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'z:/FPGA/project/triad_finder/tom/HLS'.
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:hls:hls_real2xfft:1.0 hls_real2xfft_0
+endgroup
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:hls:hls_xfft2real:1.0 hls_xfft2real_0
+endgroup
+connect_bd_intf_net [get_bd_intf_pins xfft_0/M_AXIS_DATA] [get_bd_intf_pins hls_xfft2real_0/din]
+connect_bd_intf_net [get_bd_intf_pins xfft_0/S_AXIS_DATA] [get_bd_intf_pins hls_real2xfft_0/dout]
+startgroup
+make_bd_intf_pins_external  [get_bd_intf_pins hls_real2xfft_0/din_V_V]
+endgroup
+set_property name real2xfft_din [get_bd_intf_ports din_V_V_0]
+delete_bd_objs [get_bd_intf_nets hls_real2xfft_0_dout]
+startgroup
+make_bd_intf_pins_external  [get_bd_intf_pins hls_real2xfft_0/dout]
+endgroup
+undo
+INFO: [Common 17-17] undo 'endgroup'
+INFO: [Common 17-17] undo 'make_bd_intf_pins_external  [get_bd_intf_pins hls_real2xfft_0/dout]'
+INFO: [Common 17-17] undo 'startgroup'
+undo
+INFO: [Common 17-17] undo 'delete_bd_objs [get_bd_intf_nets hls_real2xfft_0_dout]'
+startgroup
+make_bd_intf_pins_external  [get_bd_intf_pins hls_xfft2real_0/dout_V]
+endgroup
+set_property name xfft2real_dout [get_bd_intf_ports dout_V_0]
+startgroup
+make_bd_pins_external  [get_bd_pins xfft_0/aclk]
+endgroup
+startgroup
+set_property -dict [list CONFIG.aresetn {true}] [get_bd_cells xfft_0]
+endgroup
+startgroup
+make_bd_pins_external  [get_bd_pins xfft_0/aresetn]
+endgroup
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 xlconstant_0
+endgroup
+connect_bd_net [get_bd_pins xlconstant_0/dout] [get_bd_pins hls_xfft2real_0/ap_start]
+WARNING: [BD 41-1306] The connection to interface pin /hls_xfft2real_0/ap_start is being overridden by the user. This pin will not be connected as a part of interface connection ap_ctrl
+connect_bd_net [get_bd_pins hls_real2xfft_0/ap_start] [get_bd_pins xlconstant_0/dout]
+WARNING: [BD 41-1306] The connection to interface pin /hls_real2xfft_0/ap_start is being overridden by the user. This pin will not be connected as a part of interface connection ap_ctrl
+regenerate_bd_layout
+connect_bd_net [get_bd_ports aclk_0] [get_bd_pins hls_real2xfft_0/ap_clk]
+connect_bd_net [get_bd_ports aclk_0] [get_bd_pins hls_xfft2real_0/ap_clk]
+connect_bd_net [get_bd_ports aresetn_0] [get_bd_pins hls_xfft2real_0/ap_rst_n]
+connect_bd_net [get_bd_ports aresetn_0] [get_bd_pins hls_real2xfft_0/ap_rst_n]
+regenerate_bd_layout
+validate_bd_design
+CRITICAL WARNING: [BD 41-759] The input pins (listed below) are either not connected or do not have a source port, and they don't have a tie-off specified. These pins are tied-off to all 0's to avoid error in Implementation flow.
+Please check your design and connect them as needed: 
+/xfft_0/s_axis_config_tvalid
+
+save_bd_design
+Wrote  : <Z:\FPGA\project\triad_finder\tom\Vivado\wav_fft\wav_fft.srcs\sources_1\bd\fft_bd\fft_bd.bd> 
+Wrote  : <Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ui/bd_90042ead.ui> 
+generate_target all [get_files  Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/fft_bd.bd]
+INFO: [BD 41-1662] The design 'fft_bd.bd' is already validated. Therefore parameter propagation will not be re-run.
+CRITICAL WARNING: [BD 41-759] The input pins (listed below) are either not connected or do not have a source port, and they don't have a tie-off specified. These pins are tied-off to all 0's to avoid error in Implementation flow.
+Please check your design and connect them as needed: 
+/xfft_0/s_axis_config_tvalid
+
+VHDL Output written to : Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/synth/fft_bd.v
+VHDL Output written to : Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/sim/fft_bd.v
+VHDL Output written to : Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/hdl/fft_bd_wrapper.v
+INFO: [BD 41-1029] Generation completed for the IP Integrator block xfft_0 .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block hls_real2xfft_0 .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block hls_xfft2real_0 .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block xlconstant_0 .
+Exporting to file Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/hw_handoff/fft_bd.hwh
+Generated Block Design Tcl file Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/hw_handoff/fft_bd_bd.tcl
+Generated Hardware Definition File Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/synth/fft_bd.hwdef
+generate_target: Time (s): cpu = 00:00:04 ; elapsed = 00:00:18 . Memory (MB): peak = 1209.125 ; gain = 117.191
+catch { config_ip_cache -export [get_ips -all fft_bd_xfft_0_0] }
+catch { config_ip_cache -export [get_ips -all fft_bd_hls_real2xfft_0_0] }
+catch { config_ip_cache -export [get_ips -all fft_bd_hls_xfft2real_0_0] }
+export_ip_user_files -of_objects [get_files Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/fft_bd.bd] -no_script -sync -force -quiet
+create_ip_run [get_files -of_objects [get_fileset sources_1] Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/fft_bd.bd]
+launch_runs fft_bd_xfft_0_0_synth_1 fft_bd_hls_real2xfft_0_0_synth_1 fft_bd_hls_xfft2real_0_0_synth_1 -jobs 2
+[Wed Mar 30 13:17:49 2022] Launched fft_bd_xfft_0_0_synth_1, fft_bd_hls_real2xfft_0_0_synth_1, fft_bd_hls_xfft2real_0_0_synth_1...
+Run output will be captured here:
+fft_bd_xfft_0_0_synth_1: Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.runs/fft_bd_xfft_0_0_synth_1/runme.log
+fft_bd_hls_real2xfft_0_0_synth_1: Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.runs/fft_bd_hls_real2xfft_0_0_synth_1/runme.log
+fft_bd_hls_xfft2real_0_0_synth_1: Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.runs/fft_bd_hls_xfft2real_0_0_synth_1/runme.log
+export_simulation -of_objects [get_files Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/fft_bd.bd] -directory Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.ip_user_files/sim_scripts -ip_user_files_dir Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.ip_user_files -ipstatic_source_dir Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.ip_user_files/ipstatic -lib_map_path [list {modelsim=Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.cache/compile_simlib/modelsim} {questa=Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.cache/compile_simlib/questa} {riviera=Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.cache/compile_simlib/riviera} {activehdl=Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.cache/compile_simlib/activehdl}] -use_ip_compiled_libs -force -quiet
+set_property SOURCE_SET sources_1 [get_filesets sim_1]
+import_files -fileset sim_1 -norecurse Z:/FPGA/project/triad_finder/tom/HLS/verilog_tb/realfft_rtl_tb.v
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-5698] Checking validity of IPs in the design for the 'XSim' simulator...
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim'
+INFO: [Vivado 12-4795] Using compiled simulation libraries for IPs
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [USF-XSim-7] Finding pre-compiled libraries...
+INFO: [USF-XSim-11] File 'C:/Xilinx/Vivado/2020.1/data/xsim/xsim.ini' copied to run dir:'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-54] Inspecting design source files for 'realfft_rtl_tb' in fileset 'sim_1'...
+INFO: [SIM-utils-43] Exported 'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim/window_fn_coeff_tcud_rom.dat'
+INFO: [SIM-utils-43] Exported 'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim/window_fn_coeff_tdEe_rom.dat'
+INFO: [SIM-utils-43] Exported 'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim/Loop_realfft_be_dbkb_rom.dat'
+INFO: [SIM-utils-43] Exported 'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim/Loop_realfft_be_dcud_rom.dat'
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim'
+"xvlog --incr --relax -prj realfft_rtl_tb_vlog.prj"
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sim_1/imports/verilog_tb/realfft_rtl_tb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module realfft_rtl_tb
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl
+INFO: [USF-XSim-69] 'compile' step finished in '3' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim'
+"xelab -wto e6218fdcf074440cafca5bebda107270 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot realfft_rtl_tb_behav xil_defaultlib.realfft_rtl_tb xil_defaultlib.glbl -log elaborate.log"
+Vivado Simulator 2020.1
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2020.1/bin/unwrapped/win64.o/xelab.exe -wto e6218fdcf074440cafca5bebda107270 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot realfft_rtl_tb_behav xil_defaultlib.realfft_rtl_tb xil_defaultlib.glbl -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+ERROR: [VRFC 10-2063] Module <RealFFT_wrapper> not found while processing module instance <dut0> [Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sim_1/imports/verilog_tb/realfft_rtl_tb.v:66]
+ERROR: [XSIM 43-3322] Static elaboration of top level Verilog design unit(s) in library work failed.
+INFO: [USF-XSim-69] 'elaborate' step finished in '3' seconds
+INFO: [USF-XSim-99] Step results log file:'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim/elaborate.log'
+ERROR: [USF-XSim-62] 'elaborate' step failed with error(s). Please check the Tcl console output or 'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim/elaborate.log' file for more information.
+ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation.
+launch_simulation: Time (s): cpu = 00:00:02 ; elapsed = 00:00:09 . Memory (MB): peak = 1253.688 ; gain = 10.465
+ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.
+make_wrapper -files [get_files Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/fft_bd.bd] -top
+add_files -norecurse Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/hdl/fft_bd_wrapper.v
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-5698] Checking validity of IPs in the design for the 'XSim' simulator...
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim'
+INFO: [Vivado 12-4795] Using compiled simulation libraries for IPs
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [USF-XSim-7] Finding pre-compiled libraries...
+INFO: [USF-XSim-11] File 'C:/Xilinx/Vivado/2020.1/data/xsim/xsim.ini' copied to run dir:'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-54] Inspecting design source files for 'realfft_rtl_tb' in fileset 'sim_1'...
+INFO: [SIM-utils-43] Exported 'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim/window_fn_coeff_tcud_rom.dat'
+INFO: [SIM-utils-43] Exported 'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim/window_fn_coeff_tdEe_rom.dat'
+INFO: [SIM-utils-43] Exported 'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim/Loop_realfft_be_dbkb_rom.dat'
+INFO: [SIM-utils-43] Exported 'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim/Loop_realfft_be_dcud_rom.dat'
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim'
+"xvlog --incr --relax -prj realfft_rtl_tb_vlog.prj"
+INFO: [USF-XSim-69] 'compile' step finished in '3' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim'
+"xelab -wto e6218fdcf074440cafca5bebda107270 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot realfft_rtl_tb_behav xil_defaultlib.realfft_rtl_tb xil_defaultlib.glbl -log elaborate.log"
+Vivado Simulator 2020.1
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2020.1/bin/unwrapped/win64.o/xelab.exe -wto e6218fdcf074440cafca5bebda107270 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot realfft_rtl_tb_behav xil_defaultlib.realfft_rtl_tb xil_defaultlib.glbl -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+ERROR: [VRFC 10-2063] Module <RealFFT_wrapper> not found while processing module instance <dut0> [Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sim_1/imports/verilog_tb/realfft_rtl_tb.v:66]
+ERROR: [XSIM 43-3322] Static elaboration of top level Verilog design unit(s) in library work failed.
+INFO: [USF-XSim-69] 'elaborate' step finished in '2' seconds
+INFO: [USF-XSim-99] Step results log file:'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim/elaborate.log'
+ERROR: [USF-XSim-62] 'elaborate' step failed with error(s). Please check the Tcl console output or 'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim/elaborate.log' file for more information.
+ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation.
+launch_simulation: Time (s): cpu = 00:00:01 ; elapsed = 00:00:07 . Memory (MB): peak = 1253.688 ; gain = 0.000
+ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-5698] Checking validity of IPs in the design for the 'XSim' simulator...
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim'
+INFO: [Vivado 12-4795] Using compiled simulation libraries for IPs
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [USF-XSim-7] Finding pre-compiled libraries...
+INFO: [USF-XSim-11] File 'C:/Xilinx/Vivado/2020.1/data/xsim/xsim.ini' copied to run dir:'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-54] Inspecting design source files for 'realfft_rtl_tb' in fileset 'sim_1'...
+INFO: [SIM-utils-43] Exported 'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim/window_fn_coeff_tcud_rom.dat'
+INFO: [SIM-utils-43] Exported 'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim/window_fn_coeff_tdEe_rom.dat'
+INFO: [SIM-utils-43] Exported 'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim/Loop_realfft_be_dbkb_rom.dat'
+INFO: [SIM-utils-43] Exported 'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim/Loop_realfft_be_dcud_rom.dat'
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim'
+"xvlog --incr --relax -prj realfft_rtl_tb_vlog.prj"
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/318d/hdl/verilog/fifo_w16_d2_A.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module fifo_w16_d2_A_shiftReg
+INFO: [VRFC 10-311] analyzing module fifo_w16_d2_A
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/318d/hdl/verilog/fifo_w16_d256_A.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module fifo_w16_d256_A
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/318d/hdl/verilog/fifo_w16_d512_A.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module fifo_w16_d512_A
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/318d/hdl/verilog/hls_real2xfft_muleOg.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module hls_real2xfft_muleOg_DSP48_0
+INFO: [VRFC 10-311] analyzing module hls_real2xfft_muleOg
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/318d/hdl/verilog/Loop_real2xfft_outpu.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Loop_real2xfft_outpu
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/318d/hdl/verilog/Loop_sliding_win_bkb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Loop_sliding_win_bkb_core
+INFO: [VRFC 10-311] analyzing module Loop_sliding_win_bkb
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/318d/hdl/verilog/Loop_sliding_win_del.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Loop_sliding_win_del
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/318d/hdl/verilog/Loop_sliding_win_out.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Loop_sliding_win_out
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/318d/hdl/verilog/regslice_core.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module regslice_both
+INFO: [VRFC 10-311] analyzing module regslice_forward
+INFO: [VRFC 10-311] analyzing module regslice_reverse
+INFO: [VRFC 10-311] analyzing module regslice_both_w1
+INFO: [VRFC 10-311] analyzing module regslice_forward_w1
+INFO: [VRFC 10-311] analyzing module regslice_reverse_w1
+INFO: [VRFC 10-311] analyzing module ibuf
+INFO: [VRFC 10-311] analyzing module obuf
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/318d/hdl/verilog/start_for_Loop_rehbi.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module start_for_Loop_rehbi_shiftReg
+INFO: [VRFC 10-311] analyzing module start_for_Loop_rehbi
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/318d/hdl/verilog/start_for_Loop_slfYi.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module start_for_Loop_slfYi_shiftReg
+INFO: [VRFC 10-311] analyzing module start_for_Loop_slfYi
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/318d/hdl/verilog/start_for_window_g8j.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module start_for_window_g8j_shiftReg
+INFO: [VRFC 10-311] analyzing module start_for_window_g8j
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/318d/hdl/verilog/window_fn.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module window_fn
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/318d/hdl/verilog/window_fn_coeff_tcud.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module window_fn_coeff_tcud_rom
+INFO: [VRFC 10-311] analyzing module window_fn_coeff_tcud
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/318d/hdl/verilog/window_fn_coeff_tdEe.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module window_fn_coeff_tdEe_rom
+INFO: [VRFC 10-311] analyzing module window_fn_coeff_tdEe
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/318d/hdl/verilog/hls_real2xfft.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module hls_real2xfft
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.ip_user_files/bd/fft_bd/ip/fft_bd_hls_real2xfft_0_0/sim/fft_bd_hls_real2xfft_0_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module fft_bd_hls_real2xfft_0_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/620a/hdl/verilog/hls_xfft2real_desg8j.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module hls_xfft2real_desg8j
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/620a/hdl/verilog/hls_xfft2real_desg8j_memcore.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module hls_xfft2real_desg8j_memcore_ram
+INFO: [VRFC 10-311] analyzing module hls_xfft2real_desg8j_memcore
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/620a/hdl/verilog/hls_xfft2real_maceOg.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module hls_xfft2real_maceOg_DSP48_1
+INFO: [VRFC 10-311] analyzing module hls_xfft2real_maceOg
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/620a/hdl/verilog/hls_xfft2real_macfYi.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module hls_xfft2real_macfYi_DSP48_2
+INFO: [VRFC 10-311] analyzing module hls_xfft2real_macfYi
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/620a/hdl/verilog/hls_xfft2real_muldEe.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module hls_xfft2real_muldEe_DSP48_0
+INFO: [VRFC 10-311] analyzing module hls_xfft2real_muldEe
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/620a/hdl/verilog/Loop_realfft_be_buff.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Loop_realfft_be_buff
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/620a/hdl/verilog/Loop_realfft_be_dbkb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Loop_realfft_be_dbkb_rom
+INFO: [VRFC 10-311] analyzing module Loop_realfft_be_dbkb
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/620a/hdl/verilog/Loop_realfft_be_dcud.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Loop_realfft_be_dcud_rom
+INFO: [VRFC 10-311] analyzing module Loop_realfft_be_dcud
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/620a/hdl/verilog/Loop_realfft_be_desc.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Loop_realfft_be_desc
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/620a/hdl/verilog/hls_xfft2real.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module hls_xfft2real
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.ip_user_files/bd/fft_bd/ip/fft_bd_hls_xfft2real_0_0/sim/fft_bd_hls_xfft2real_0_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module fft_bd_hls_xfft2real_0_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.ip_user_files/bd/fft_bd/ip/fft_bd_xlconstant_0_0/sim/fft_bd_xlconstant_0_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module fft_bd_xlconstant_0_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.ip_user_files/bd/fft_bd/sim/fft_bd.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module fft_bd
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/hdl/fft_bd_wrapper.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module fft_bd_wrapper
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sim_1/imports/verilog_tb/realfft_rtl_tb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module realfft_rtl_tb
+"xvhdl --incr --relax -prj realfft_rtl_tb_vhdl.prj"
+INFO: [VRFC 10-163] Analyzing VHDL file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.ip_user_files/bd/fft_bd/ip/fft_bd_xfft_0_0/sim/fft_bd_xfft_0_0.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'fft_bd_xfft_0_0'
+run_program: Time (s): cpu = 00:00:01 ; elapsed = 00:00:09 . Memory (MB): peak = 1261.449 ; gain = 0.000
+INFO: [USF-XSim-69] 'compile' step finished in '10' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim'
+"xelab -wto e6218fdcf074440cafca5bebda107270 --incr --debug typical --relax --mt 2 -L xbip_utils_v3_0_10 -L axi_utils_v2_0_6 -L c_reg_fd_v12_0_6 -L xbip_dsp48_wrapper_v3_0_4 -L xbip_pipe_v3_0_6 -L xbip_dsp48_addsub_v3_0_6 -L xbip_addsub_v3_0_6 -L c_addsub_v12_0_14 -L c_mux_bit_v12_0_6 -L c_shift_ram_v12_0_14 -L xbip_bram18k_v3_0_6 -L mult_gen_v12_0_16 -L cmpy_v6_0_18 -L floating_point_v7_0_17 -L xfft_v9_1_4 -L xil_defaultlib -L xlconstant_v1_1_7 -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot realfft_rtl_tb_behav xil_defaultlib.realfft_rtl_tb xil_defaultlib.glbl -log elaborate.log"
+Vivado Simulator 2020.1
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2020.1/bin/unwrapped/win64.o/xelab.exe -wto e6218fdcf074440cafca5bebda107270 --incr --debug typical --relax --mt 2 -L xbip_utils_v3_0_10 -L axi_utils_v2_0_6 -L c_reg_fd_v12_0_6 -L xbip_dsp48_wrapper_v3_0_4 -L xbip_pipe_v3_0_6 -L xbip_dsp48_addsub_v3_0_6 -L xbip_addsub_v3_0_6 -L c_addsub_v12_0_14 -L c_mux_bit_v12_0_6 -L c_shift_ram_v12_0_14 -L xbip_bram18k_v3_0_6 -L mult_gen_v12_0_16 -L cmpy_v6_0_18 -L floating_point_v7_0_17 -L xfft_v9_1_4 -L xil_defaultlib -L xlconstant_v1_1_7 -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot realfft_rtl_tb_behav xil_defaultlib.realfft_rtl_tb xil_defaultlib.glbl -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+ERROR: [VRFC 10-3180] cannot find port 'aresetn' on this module [Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sim_1/imports/verilog_tb/realfft_rtl_tb.v:68]
+ERROR: [VRFC 10-3180] cannot find port 'aclk' on this module [Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sim_1/imports/verilog_tb/realfft_rtl_tb.v:67]
+ERROR: [XSIM 43-3322] Static elaboration of top level Verilog design unit(s) in library work failed.
+INFO: [USF-XSim-69] 'elaborate' step finished in '4' seconds
+INFO: [USF-XSim-99] Step results log file:'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim/elaborate.log'
+ERROR: [USF-XSim-62] 'elaborate' step failed with error(s). Please check the Tcl console output or 'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim/elaborate.log' file for more information.
+ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation.
+launch_simulation: Time (s): cpu = 00:00:02 ; elapsed = 00:00:17 . Memory (MB): peak = 1261.449 ; gain = 0.000
+ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.
+set_property name aresetn [get_bd_ports aresetn_0]
+set_property name aclk [get_bd_ports aclk_0]
+validate_bd_design
+CRITICAL WARNING: [BD 41-759] The input pins (listed below) are either not connected or do not have a source port, and they don't have a tie-off specified. These pins are tied-off to all 0's to avoid error in Implementation flow.
+Please check your design and connect them as needed: 
+/xfft_0/s_axis_config_tvalid
+
+save_bd_design
+Wrote  : <Z:\FPGA\project\triad_finder\tom\Vivado\wav_fft\wav_fft.srcs\sources_1\bd\fft_bd\fft_bd.bd> 
+Wrote  : <Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ui/bd_90042ead.ui> 
+generate_target Simulation [get_files Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/fft_bd.bd]
+INFO: [BD 41-1662] The design 'fft_bd.bd' is already validated. Therefore parameter propagation will not be re-run.
+CRITICAL WARNING: [BD 41-759] The input pins (listed below) are either not connected or do not have a source port, and they don't have a tie-off specified. These pins are tied-off to all 0's to avoid error in Implementation flow.
+Please check your design and connect them as needed: 
+/xfft_0/s_axis_config_tvalid
+
+VHDL Output written to : Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/synth/fft_bd.v
+VHDL Output written to : Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/sim/fft_bd.v
+VHDL Output written to : Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/hdl/fft_bd_wrapper.v
+Exporting to file Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/hw_handoff/fft_bd.hwh
+Generated Block Design Tcl file Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/hw_handoff/fft_bd_bd.tcl
+Generated Hardware Definition File Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/synth/fft_bd.hwdef
+export_ip_user_files -of_objects [get_files Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/fft_bd.bd] -no_script -sync -force -quiet
+export_simulation -of_objects [get_files Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/fft_bd.bd] -directory Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.ip_user_files/sim_scripts -ip_user_files_dir Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.ip_user_files -ipstatic_source_dir Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.ip_user_files/ipstatic -lib_map_path [list {modelsim=Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.cache/compile_simlib/modelsim} {questa=Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.cache/compile_simlib/questa} {riviera=Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.cache/compile_simlib/riviera} {activehdl=Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.cache/compile_simlib/activehdl}] -use_ip_compiled_libs -force -quiet
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-5698] Checking validity of IPs in the design for the 'XSim' simulator...
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim'
+INFO: [Vivado 12-4795] Using compiled simulation libraries for IPs
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [USF-XSim-7] Finding pre-compiled libraries...
+INFO: [USF-XSim-11] File 'C:/Xilinx/Vivado/2020.1/data/xsim/xsim.ini' copied to run dir:'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-54] Inspecting design source files for 'realfft_rtl_tb' in fileset 'sim_1'...
+INFO: [SIM-utils-43] Exported 'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim/window_fn_coeff_tcud_rom.dat'
+INFO: [SIM-utils-43] Exported 'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim/window_fn_coeff_tdEe_rom.dat'
+INFO: [SIM-utils-43] Exported 'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim/Loop_realfft_be_dbkb_rom.dat'
+INFO: [SIM-utils-43] Exported 'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim/Loop_realfft_be_dcud_rom.dat'
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim'
+"xvlog --incr --relax -prj realfft_rtl_tb_vlog.prj"
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/318d/hdl/verilog/fifo_w16_d2_A.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module fifo_w16_d2_A_shiftReg
+INFO: [VRFC 10-311] analyzing module fifo_w16_d2_A
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/318d/hdl/verilog/fifo_w16_d256_A.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module fifo_w16_d256_A
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/318d/hdl/verilog/fifo_w16_d512_A.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module fifo_w16_d512_A
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/318d/hdl/verilog/hls_real2xfft_muleOg.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module hls_real2xfft_muleOg_DSP48_0
+INFO: [VRFC 10-311] analyzing module hls_real2xfft_muleOg
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/318d/hdl/verilog/Loop_real2xfft_outpu.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Loop_real2xfft_outpu
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/318d/hdl/verilog/Loop_sliding_win_bkb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Loop_sliding_win_bkb_core
+INFO: [VRFC 10-311] analyzing module Loop_sliding_win_bkb
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/318d/hdl/verilog/Loop_sliding_win_del.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Loop_sliding_win_del
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/318d/hdl/verilog/Loop_sliding_win_out.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Loop_sliding_win_out
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/318d/hdl/verilog/regslice_core.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module regslice_both
+INFO: [VRFC 10-311] analyzing module regslice_forward
+INFO: [VRFC 10-311] analyzing module regslice_reverse
+INFO: [VRFC 10-311] analyzing module regslice_both_w1
+INFO: [VRFC 10-311] analyzing module regslice_forward_w1
+INFO: [VRFC 10-311] analyzing module regslice_reverse_w1
+INFO: [VRFC 10-311] analyzing module ibuf
+INFO: [VRFC 10-311] analyzing module obuf
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/318d/hdl/verilog/start_for_Loop_rehbi.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module start_for_Loop_rehbi_shiftReg
+INFO: [VRFC 10-311] analyzing module start_for_Loop_rehbi
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/318d/hdl/verilog/start_for_Loop_slfYi.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module start_for_Loop_slfYi_shiftReg
+INFO: [VRFC 10-311] analyzing module start_for_Loop_slfYi
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/318d/hdl/verilog/start_for_window_g8j.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module start_for_window_g8j_shiftReg
+INFO: [VRFC 10-311] analyzing module start_for_window_g8j
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/318d/hdl/verilog/window_fn.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module window_fn
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/318d/hdl/verilog/window_fn_coeff_tcud.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module window_fn_coeff_tcud_rom
+INFO: [VRFC 10-311] analyzing module window_fn_coeff_tcud
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/318d/hdl/verilog/window_fn_coeff_tdEe.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module window_fn_coeff_tdEe_rom
+INFO: [VRFC 10-311] analyzing module window_fn_coeff_tdEe
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/318d/hdl/verilog/hls_real2xfft.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module hls_real2xfft
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.ip_user_files/bd/fft_bd/ip/fft_bd_hls_real2xfft_0_0/sim/fft_bd_hls_real2xfft_0_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module fft_bd_hls_real2xfft_0_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/620a/hdl/verilog/hls_xfft2real_desg8j.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module hls_xfft2real_desg8j
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/620a/hdl/verilog/hls_xfft2real_desg8j_memcore.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module hls_xfft2real_desg8j_memcore_ram
+INFO: [VRFC 10-311] analyzing module hls_xfft2real_desg8j_memcore
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/620a/hdl/verilog/hls_xfft2real_maceOg.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module hls_xfft2real_maceOg_DSP48_1
+INFO: [VRFC 10-311] analyzing module hls_xfft2real_maceOg
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/620a/hdl/verilog/hls_xfft2real_macfYi.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module hls_xfft2real_macfYi_DSP48_2
+INFO: [VRFC 10-311] analyzing module hls_xfft2real_macfYi
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/620a/hdl/verilog/hls_xfft2real_muldEe.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module hls_xfft2real_muldEe_DSP48_0
+INFO: [VRFC 10-311] analyzing module hls_xfft2real_muldEe
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/620a/hdl/verilog/Loop_realfft_be_buff.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Loop_realfft_be_buff
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/620a/hdl/verilog/Loop_realfft_be_dbkb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Loop_realfft_be_dbkb_rom
+INFO: [VRFC 10-311] analyzing module Loop_realfft_be_dbkb
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/620a/hdl/verilog/Loop_realfft_be_dcud.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Loop_realfft_be_dcud_rom
+INFO: [VRFC 10-311] analyzing module Loop_realfft_be_dcud
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/620a/hdl/verilog/Loop_realfft_be_desc.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Loop_realfft_be_desc
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/620a/hdl/verilog/hls_xfft2real.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module hls_xfft2real
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.ip_user_files/bd/fft_bd/ip/fft_bd_hls_xfft2real_0_0/sim/fft_bd_hls_xfft2real_0_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module fft_bd_hls_xfft2real_0_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.ip_user_files/bd/fft_bd/ip/fft_bd_xlconstant_0_0/sim/fft_bd_xlconstant_0_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module fft_bd_xlconstant_0_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.ip_user_files/bd/fft_bd/sim/fft_bd.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module fft_bd
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/hdl/fft_bd_wrapper.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module fft_bd_wrapper
+INFO: [VRFC 10-2263] Analyzing Verilog file "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sim_1/imports/verilog_tb/realfft_rtl_tb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module realfft_rtl_tb
+"xvhdl --incr --relax -prj realfft_rtl_tb_vhdl.prj"
+run_program: Time (s): cpu = 00:00:01 ; elapsed = 00:00:08 . Memory (MB): peak = 1261.449 ; gain = 0.000
+INFO: [USF-XSim-69] 'compile' step finished in '9' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim'
+"xelab -wto e6218fdcf074440cafca5bebda107270 --incr --debug typical --relax --mt 2 -L xbip_utils_v3_0_10 -L axi_utils_v2_0_6 -L c_reg_fd_v12_0_6 -L xbip_dsp48_wrapper_v3_0_4 -L xbip_pipe_v3_0_6 -L xbip_dsp48_addsub_v3_0_6 -L xbip_addsub_v3_0_6 -L c_addsub_v12_0_14 -L c_mux_bit_v12_0_6 -L c_shift_ram_v12_0_14 -L xbip_bram18k_v3_0_6 -L mult_gen_v12_0_16 -L cmpy_v6_0_18 -L floating_point_v7_0_17 -L xfft_v9_1_4 -L xil_defaultlib -L xlconstant_v1_1_7 -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot realfft_rtl_tb_behav xil_defaultlib.realfft_rtl_tb xil_defaultlib.glbl -log elaborate.log"
+Vivado Simulator 2020.1
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2020.1/bin/unwrapped/win64.o/xelab.exe -wto e6218fdcf074440cafca5bebda107270 --incr --debug typical --relax --mt 2 -L xbip_utils_v3_0_10 -L axi_utils_v2_0_6 -L c_reg_fd_v12_0_6 -L xbip_dsp48_wrapper_v3_0_4 -L xbip_pipe_v3_0_6 -L xbip_dsp48_addsub_v3_0_6 -L xbip_addsub_v3_0_6 -L c_addsub_v12_0_14 -L c_mux_bit_v12_0_6 -L c_shift_ram_v12_0_14 -L xbip_bram18k_v3_0_6 -L mult_gen_v12_0_16 -L cmpy_v6_0_18 -L floating_point_v7_0_17 -L xfft_v9_1_4 -L xil_defaultlib -L xlconstant_v1_1_7 -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot realfft_rtl_tb_behav xil_defaultlib.realfft_rtl_tb xil_defaultlib.glbl -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+WARNING: [VRFC 10-5021] port 's_axis_config_tready' is not connected on this instance [Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.ip_user_files/bd/fft_bd/sim/fft_bd.v:79]
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.standard
+Compiling package std.textio
+Compiling package ieee.std_logic_1164
+Compiling package ieee.numeric_std
+Compiling package xbip_utils_v3_0_10.xbip_utils_v3_0_10_pkg
+Compiling package xfft_v9_1_4.xfft_v9_1_4_viv_comp
+Compiling package ieee.std_logic_arith
+Compiling package ieee.std_logic_unsigned
+Compiling package ieee.math_real
+Compiling package axi_utils_v2_0_6.axi_utils_v2_0_6_pkg
+Compiling package mult_gen_v12_0_16.mult_gen_v12_0_16_pkg
+Compiling package ieee.std_logic_signed
+Compiling package cmpy_v6_0_18.cmpy_v6_0_18_pkg
+Compiling package floating_point_v7_0_17.floating_point_v7_0_17_consts
+Compiling package floating_point_v7_0_17.floating_point_v7_0_17_exp_table...
+Compiling package floating_point_v7_0_17.floating_point_v7_0_17_pkg
+Compiling package xfft_v9_1_4.pkg
+Compiling package xfft_v9_1_4.xfft_v9_1_4_axi_pkg
+Compiling package axi_utils_v2_0_6.global_util_pkg
+Compiling package axi_utils_v2_0_6.axi_utils_comps
+Compiling package unisim.vcomponents
+Compiling package xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv_comp
+Compiling package xbip_addsub_v3_0_6.xbip_addsub_v3_0_6_viv_comp
+Compiling package c_addsub_v12_0_14.c_addsub_v12_0_14_pkg
+Compiling package c_addsub_v12_0_14.c_addsub_v12_0_14_pkg_legacy
+Compiling package c_reg_fd_v12_0_6.c_reg_fd_v12_0_6_viv_comp
+Compiling package ieee.vital_timing
+Compiling package ieee.vital_primitives
+Compiling package unisim.vpkg
+Compiling package c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_pkg
+Compiling package c_mux_bit_v12_0_6.c_mux_bit_v12_0_6_viv_comp
+Compiling package xpm.vcomponents
+Compiling package ieee.std_logic_textio
+Compiling package xfft_v9_1_4.half_sincos_tw_table
+Compiling package mult_gen_v12_0_16.dsp_pkg
+Compiling package xfft_v9_1_4.quarter_sin_tw_table
+Compiling package xfft_v9_1_4.quarter2_sin_tw_table
+Compiling module xil_defaultlib.Loop_sliding_win_bkb_core(DATA_W...
+Compiling module xil_defaultlib.Loop_sliding_win_bkb(DataWidth=1...
+Compiling module xil_defaultlib.ibuf(W=17)
+Compiling module xil_defaultlib.obuf(W=17)
+Compiling module xil_defaultlib.regslice_both(DataWidth=16)
+Compiling module xil_defaultlib.Loop_sliding_win_del
+Compiling module xil_defaultlib.Loop_sliding_win_out
+Compiling module xil_defaultlib.window_fn_coeff_tcud_rom
+Compiling module xil_defaultlib.window_fn_coeff_tcud(DataWidth=1...
+Compiling module xil_defaultlib.window_fn_coeff_tdEe_rom
+Compiling module xil_defaultlib.window_fn_coeff_tdEe(DataWidth=1...
+Compiling module xil_defaultlib.hls_real2xfft_muleOg_DSP48_0
+Compiling module xil_defaultlib.hls_real2xfft_muleOg(ID=1,NUM_ST...
+Compiling module xil_defaultlib.window_fn
+Compiling module xil_defaultlib.ibuf(W=33)
+Compiling module xil_defaultlib.obuf(W=33)
+Compiling module xil_defaultlib.regslice_both_default
+Compiling module xil_defaultlib.ibuf(W=2)
+Compiling module xil_defaultlib.obuf(W=2)
+Compiling module xil_defaultlib.regslice_both(DataWidth=1)
+Compiling module xil_defaultlib.Loop_real2xfft_outpu
+Compiling module xil_defaultlib.fifo_w16_d256_A
+Compiling module xil_defaultlib.fifo_w16_d512_A
+Compiling module xil_defaultlib.fifo_w16_d2_A_shiftReg
+Compiling module xil_defaultlib.fifo_w16_d2_A
+Compiling module xil_defaultlib.start_for_Loop_slfYi_shiftReg
+Compiling module xil_defaultlib.start_for_Loop_slfYi
+Compiling module xil_defaultlib.start_for_window_g8j_shiftReg
+Compiling module xil_defaultlib.start_for_window_g8j
+Compiling module xil_defaultlib.start_for_Loop_rehbi_shiftReg
+Compiling module xil_defaultlib.start_for_Loop_rehbi
+Compiling module xil_defaultlib.hls_real2xfft
+Compiling module xil_defaultlib.fft_bd_hls_real2xfft_0_0
+Compiling module xil_defaultlib.hls_xfft2real_desg8j_memcore_ram
+Compiling module xil_defaultlib.hls_xfft2real_desg8j_memcore
+Compiling module xil_defaultlib.hls_xfft2real_desg8j(AddressRang...
+Compiling module xil_defaultlib.Loop_realfft_be_buff
+Compiling module xil_defaultlib.Loop_realfft_be_dbkb_rom
+Compiling module xil_defaultlib.Loop_realfft_be_dbkb(DataWidth=1...
+Compiling module xil_defaultlib.Loop_realfft_be_dcud_rom
+Compiling module xil_defaultlib.Loop_realfft_be_dcud(DataWidth=1...
+Compiling module xil_defaultlib.hls_xfft2real_muldEe_DSP48_0
+Compiling module xil_defaultlib.hls_xfft2real_muldEe(ID=1,NUM_ST...
+Compiling module xil_defaultlib.hls_xfft2real_maceOg_DSP48_1
+Compiling module xil_defaultlib.hls_xfft2real_maceOg(ID=1,NUM_ST...
+Compiling module xil_defaultlib.hls_xfft2real_macfYi_DSP48_2
+Compiling module xil_defaultlib.hls_xfft2real_macfYi(ID=1,NUM_ST...
+Compiling module xil_defaultlib.Loop_realfft_be_desc
+Compiling module xil_defaultlib.hls_xfft2real
+Compiling module xil_defaultlib.fft_bd_hls_xfft2real_0_0
+Compiling architecture xilinx of entity axi_utils_v2_0_6.glb_srl_fifo [\glb_srl_fifo(width=11,has_uvpro...]
+Compiling architecture xilinx of entity axi_utils_v2_0_6.glb_ifx_slave [\glb_ifx_slave(width=11,has_uvpr...]
+Compiling architecture synth of entity xfft_v9_1_4.axi_wrapper_input_fifo [\axi_wrapper_input_fifo(c_fifo_w...]
+Compiling architecture xilinx of entity axi_utils_v2_0_6.glb_srl_fifo [\glb_srl_fifo(width=33,has_uvpro...]
+Compiling architecture xilinx of entity axi_utils_v2_0_6.glb_ifx_slave [\glb_ifx_slave(width=33,has_uvpr...]
+Compiling architecture synth of entity xfft_v9_1_4.axi_wrapper_input_fifo [\axi_wrapper_input_fifo(c_fifo_w...]
+Compiling architecture xilinx of entity axi_utils_v2_0_6.glb_srl_fifo [\glb_srl_fifo(width=33,has_uvpro...]
+Compiling architecture xilinx of entity axi_utils_v2_0_6.glb_ifx_master [\glb_ifx_master(width=33,afull_t...]
+Compiling architecture synth of entity xfft_v9_1_4.axi_wrapper_output_fifo [\axi_wrapper_output_fifo(c_fifo_...]
+Compiling architecture synth of entity xfft_v9_1_4.axi_wrapper [\axi_wrapper(c_nfft_max=9,c_arch...]
+Compiling architecture xilinx of entity xfft_v9_1_4.equ_rtl [\equ_rtl(c_xdevicefamily="zynq",...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_cnt_ctrl [\r22_cnt_ctrl(c_xdevicefamily="z...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_cnt_ctrl [\r22_cnt_ctrl(c_xdevicefamily="z...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture struct of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_legacy [\c_shift_ram_v12_0_14_legacy(c_x...]
+Compiling architecture synth of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_viv [\c_shift_ram_v12_0_14_viv(c_xdev...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture fd_v of entity unisim.FD [fd_default]
+Compiling architecture struct of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_legacy [\c_shift_ram_v12_0_14_legacy(c_x...]
+Compiling architecture synth of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_viv [\c_shift_ram_v12_0_14_viv(c_xdev...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture struct of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_legacy [\c_shift_ram_v12_0_14_legacy(c_x...]
+Compiling architecture synth of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_viv [\c_shift_ram_v12_0_14_viv(c_xdev...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture fde_v of entity unisim.FDE [fde_default]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture lut3_v of entity unisim.LUT3 [\LUT3(init="11001010")(0,7)\]
+Compiling architecture xilinx of entity xfft_v9_1_4.mux_bus2 [\mux_bus2(c_xdevicefamily="zynq"...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_delay_mux [\r22_delay_mux(c_xdevicefamily="...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_delay_mux [\r22_delay_mux(c_xdevicefamily="...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture rb18_internal_vhdl_v of entity unisim.RB18_INTERNAL_VHDL [\RB18_INTERNAL_VHDL(bram_size=18...]
+Compiling architecture ramb18e1_v of entity unisim.RAMB18E1 [\RAMB18E1(doa_reg=1,dob_reg=1,ra...]
+Compiling architecture xilinx of entity xfft_v9_1_4.dpm [\dpm(c_xdevicefamily="zynq",wm="...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_memory [\r22_memory(c_xdevicefamily="zyn...]
+Compiling architecture structural of entity c_reg_fd_v12_0_6.c_reg_fd_v12_0_6_viv [\c_reg_fd_v12_0_6_viv(c_width=18...]
+Compiling architecture rtl of entity c_addsub_v12_0_14.c_addsub_v12_0_14_lut6_legacy [\c_addsub_v12_0_14_lut6_legacy(c...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_fabric_legacy [\c_addsub_v12_0_14_fabric_legacy...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_legacy [\c_addsub_v12_0_14_legacy(c_fami...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_viv [\c_addsub_v12_0_14_viv(c_xdevice...]
+Compiling architecture xilinx of entity xfft_v9_1_4.adder_bypass [\adder_bypass(c_xdevicefamily="z...]
+Compiling architecture structural of entity c_reg_fd_v12_0_6.c_reg_fd_v12_0_6_viv [\c_reg_fd_v12_0_6_viv(c_width=18...]
+Compiling architecture rtl of entity c_addsub_v12_0_14.c_addsub_v12_0_14_lut6_legacy [\c_addsub_v12_0_14_lut6_legacy(c...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_fabric_legacy [\c_addsub_v12_0_14_fabric_legacy...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_legacy [\c_addsub_v12_0_14_legacy(c_fami...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_viv [\c_addsub_v12_0_14_viv(c_xdevice...]
+Compiling architecture xilinx of entity xfft_v9_1_4.sub_byp [\sub_byp(c_xdevicefamily="zynq",...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_bfly_byp [\r22_bfly_byp(c_xdevicefamily="z...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_bf [\r22_bf(c_xdevicefamily="zynq",c...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture synth of entity xfft_v9_1_4.r22_twos_comp_mux [\r22_twos_comp_mux(c_xdevicefami...]
+Compiling architecture synth of entity xfft_v9_1_4.r22_twos_comp_mux [\r22_twos_comp_mux(c_xdevicefami...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.mux_bus2 [\mux_bus2(c_xdevicefamily="zynq"...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_delay_mux [\r22_delay_mux(c_xdevicefamily="...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_delay_mux [\r22_delay_mux(c_xdevicefamily="...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.dpm [\dpm(c_xdevicefamily="zynq",wm="...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_memory [\r22_memory(c_xdevicefamily="zyn...]
+Compiling architecture structural of entity c_reg_fd_v12_0_6.c_reg_fd_v12_0_6_viv [\c_reg_fd_v12_0_6_viv(c_width=19...]
+Compiling architecture rtl of entity c_addsub_v12_0_14.c_addsub_v12_0_14_lut6_legacy [\c_addsub_v12_0_14_lut6_legacy(c...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_fabric_legacy [\c_addsub_v12_0_14_fabric_legacy...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_legacy [\c_addsub_v12_0_14_legacy(c_fami...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_viv [\c_addsub_v12_0_14_viv(c_xdevice...]
+Compiling architecture xilinx of entity xfft_v9_1_4.adder_bypass [\adder_bypass(c_xdevicefamily="z...]
+Compiling architecture structural of entity c_reg_fd_v12_0_6.c_reg_fd_v12_0_6_viv [\c_reg_fd_v12_0_6_viv(c_width=19...]
+Compiling architecture rtl of entity c_addsub_v12_0_14.c_addsub_v12_0_14_lut6_legacy [\c_addsub_v12_0_14_lut6_legacy(c...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_fabric_legacy [\c_addsub_v12_0_14_fabric_legacy...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_legacy [\c_addsub_v12_0_14_legacy(c_fami...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_viv [\c_addsub_v12_0_14_viv(c_xdevice...]
+Compiling architecture xilinx of entity xfft_v9_1_4.sub_byp [\sub_byp(c_xdevicefamily="zynq",...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_bfly_byp [\r22_bfly_byp(c_xdevicefamily="z...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_bf [\r22_bf(c_xdevicefamily="zynq",c...]
+Compiling architecture structural of entity c_reg_fd_v12_0_6.c_reg_fd_v12_0_6_viv [\c_reg_fd_v12_0_6_viv(c_width=9,...]
+Compiling architecture rtl of entity c_addsub_v12_0_14.c_addsub_v12_0_14_lut6_legacy [\c_addsub_v12_0_14_lut6_legacy(c...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_fabric_legacy [\c_addsub_v12_0_14_fabric_legacy...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_legacy [\c_addsub_v12_0_14_legacy(c_fami...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_viv [\c_addsub_v12_0_14_viv(c_xdevice...]
+Compiling architecture xilinx of entity xfft_v9_1_4.adder [\adder(c_xdevicefamily="zynq",c_...]
+Compiling architecture lut6_v of entity unisim.LUT6 [\LUT6(init="11111111000000001111...]
+Compiling architecture xilinx of entity xfft_v9_1_4.mux_bus4 [\mux_bus4(c_xdevicefamily="zynq"...]
+Compiling architecture vcc_v of entity unisim.VCC [vcc_default]
+Compiling architecture xilinx of entity xfft_v9_1_4.twgen_half_sincos [\twgen_half_sincos(c_xdevicefami...]
+Compiling architecture xilinx of entity xfft_v9_1_4.twiddle_gen [\twiddle_gen(c_xdevicefamily="zy...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_tw_gen [\r22_tw_gen(c_xdevicefamily="zyn...]
+Compiling architecture xilinx of entity cmpy_v6_0_18.delay_line [\delay_line(c_xdevicefamily="zyn...]
+Compiling architecture xilinx of entity cmpy_v6_0_18.delay_line [\delay_line(c_xdevicefamily="zyn...]
+Compiling architecture xilinx of entity mult_gen_v12_0_16.delay_line [\delay_line(c_xdevicefamily="zyn...]
+Compiling architecture xilinx of entity mult_gen_v12_0_16.delay_line [\delay_line(c_xdevicefamily="zyn...]
+Compiling architecture dsp48e1_v of entity unisim.DSP48E1 [\DSP48E1(acascreg=2,alumodereg=0...]
+Compiling architecture xilinx of entity mult_gen_v12_0_16.delay_line [\delay_line(c_xdevicefamily="zyn...]
+Compiling architecture xilinx of entity mult_gen_v12_0_16.op_resize [\op_resize(ai_width=18,bi_width=...]
+Compiling architecture xilinx of entity mult_gen_v12_0_16.dsp [\dsp(c_xdevicefamily="zynq",c_a_...]
+Compiling architecture xilinx of entity cmpy_v6_0_18.cmpy_3_dsp48_mult [\cmpy_3_dsp48_mult(c_xdevicefami...]
+Compiling architecture xilinx of entity mult_gen_v12_0_16.delay_line [\delay_line(c_xdevicefamily="zyn...]
+Compiling architecture xilinx of entity mult_gen_v12_0_16.delay_line [\delay_line(c_xdevicefamily="zyn...]
+Compiling architecture dsp48e1_v of entity unisim.DSP48E1 [\DSP48E1(alumodereg=0,bcascreg=2...]
+Compiling architecture xilinx of entity mult_gen_v12_0_16.op_resize [\op_resize(ai_width=19,bi_width=...]
+Compiling architecture xilinx of entity mult_gen_v12_0_16.dsp [\dsp(c_xdevicefamily="zynq",c_a_...]
+Compiling architecture xilinx of entity cmpy_v6_0_18.cmpy_3_dsp48_mult [\cmpy_3_dsp48_mult(c_xdevicefami...]
+Compiling architecture xilinx of entity mult_gen_v12_0_16.dsp [\dsp(c_xdevicefamily="zynq",c_a_...]
+Compiling architecture xilinx of entity cmpy_v6_0_18.cmpy_3_dsp48_mult [\cmpy_3_dsp48_mult(c_xdevicefami...]
+Compiling architecture xilinx of entity cmpy_v6_0_18.input_negation [\input_negation(c_xdevicefamily=...]
+Compiling architecture xilinx of entity cmpy_v6_0_18.delay_line [\delay_line(c_xdevicefamily="zyn...]
+Compiling architecture xilinx of entity cmpy_v6_0_18.delay_line [\delay_line(c_xdevicefamily="zyn...]
+Compiling architecture xilinx of entity cmpy_v6_0_18.cmpy_3_dsp48 [\cmpy_3_dsp48(c_xdevicefamily="z...]
+Compiling architecture xilinx of entity cmpy_v6_0_18.cmpy_v6_0_18_synth [\cmpy_v6_0_18_synth(c_xdevicefam...]
+Compiling architecture xilinx of entity xfft_v9_1_4.cmpy [\cmpy(c_xdevicefamily="zynq",a_w...]
+Compiling architecture xilinx of entity xfft_v9_1_4.mux_bus4 [\mux_bus4(c_xdevicefamily="zynq"...]
+Compiling architecture xilinx of entity xfft_v9_1_4.arith_shift3 [\arith_shift3(c_xdevicefamily="z...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_pe [\r22_pe(c_xdevicefamily="zynq",c...]
+Compiling architecture synth of entity xfft_v9_1_4.srl_fifo [\srl_fifo(c_width=1)\]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_cnt_ctrl [\r22_cnt_ctrl(c_xdevicefamily="z...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_cnt_ctrl [\r22_cnt_ctrl(c_xdevicefamily="z...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_delay_mux [\r22_delay_mux(c_xdevicefamily="...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_delay_mux [\r22_delay_mux(c_xdevicefamily="...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture struct of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_legacy [\c_shift_ram_v12_0_14_legacy(c_x...]
+Compiling architecture synth of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_viv [\c_shift_ram_v12_0_14_viv(c_xdev...]
+Compiling architecture synth of entity xfft_v9_1_4.r22_srl_memory [\r22_srl_memory(c_xdevicefamily=...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_memory [\r22_memory(c_xdevicefamily="zyn...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_bf [\r22_bf(c_xdevicefamily="zynq",c...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_delay_mux [\r22_delay_mux(c_xdevicefamily="...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_delay_mux [\r22_delay_mux(c_xdevicefamily="...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture struct of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_legacy [\c_shift_ram_v12_0_14_legacy(c_x...]
+Compiling architecture synth of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_viv [\c_shift_ram_v12_0_14_viv(c_xdev...]
+Compiling architecture synth of entity xfft_v9_1_4.r22_srl_memory [\r22_srl_memory(c_xdevicefamily=...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_memory [\r22_memory(c_xdevicefamily="zyn...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_bf [\r22_bf(c_xdevicefamily="zynq",c...]
+Compiling architecture structural of entity c_reg_fd_v12_0_6.c_reg_fd_v12_0_6_viv [\c_reg_fd_v12_0_6_viv(c_width=7,...]
+Compiling architecture rtl of entity c_addsub_v12_0_14.c_addsub_v12_0_14_lut6_legacy [\c_addsub_v12_0_14_lut6_legacy(c...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_fabric_legacy [\c_addsub_v12_0_14_fabric_legacy...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_legacy [\c_addsub_v12_0_14_legacy(c_fami...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_viv [\c_addsub_v12_0_14_viv(c_xdevice...]
+Compiling architecture xilinx of entity xfft_v9_1_4.adder [\adder(c_xdevicefamily="zynq",c_...]
+Compiling architecture xilinx of entity xfft_v9_1_4.mux_bus4 [\mux_bus4(c_xdevicefamily="zynq"...]
+Compiling architecture struct of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_legacy [\c_shift_ram_v12_0_14_legacy(c_x...]
+Compiling architecture synth of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_viv [\c_shift_ram_v12_0_14_viv(c_xdev...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.twgen_distmem [\twgen_distmem(theta_width=6,pip...]
+Compiling architecture xilinx of entity xfft_v9_1_4.twiddle_gen [\twiddle_gen(c_xdevicefamily="zy...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_tw_gen [\r22_tw_gen(c_xdevicefamily="zyn...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_pe [\r22_pe(c_xdevicefamily="zynq",c...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_cnt_ctrl [\r22_cnt_ctrl(c_xdevicefamily="z...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_cnt_ctrl [\r22_cnt_ctrl(c_xdevicefamily="z...]
+Compiling architecture struct of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_legacy [\c_shift_ram_v12_0_14_legacy(c_x...]
+Compiling architecture synth of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_viv [\c_shift_ram_v12_0_14_viv(c_xdev...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture struct of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_legacy [\c_shift_ram_v12_0_14_legacy(c_x...]
+Compiling architecture synth of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_viv [\c_shift_ram_v12_0_14_viv(c_xdev...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture struct of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_legacy [\c_shift_ram_v12_0_14_legacy(c_x...]
+Compiling architecture synth of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_viv [\c_shift_ram_v12_0_14_viv(c_xdev...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture struct of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_legacy [\c_shift_ram_v12_0_14_legacy(c_x...]
+Compiling architecture synth of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_viv [\c_shift_ram_v12_0_14_viv(c_xdev...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture struct of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_legacy [\c_shift_ram_v12_0_14_legacy(c_x...]
+Compiling architecture synth of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_viv [\c_shift_ram_v12_0_14_viv(c_xdev...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture struct of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_legacy [\c_shift_ram_v12_0_14_legacy(c_x...]
+Compiling architecture synth of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_viv [\c_shift_ram_v12_0_14_viv(c_xdev...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture struct of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_legacy [\c_shift_ram_v12_0_14_legacy(c_x...]
+Compiling architecture synth of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_viv [\c_shift_ram_v12_0_14_viv(c_xdev...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture structural of entity c_reg_fd_v12_0_6.c_reg_fd_v12_0_6_viv [\c_reg_fd_v12_0_6_viv(c_width=17...]
+Compiling architecture rtl of entity c_addsub_v12_0_14.c_addsub_v12_0_14_lut6_legacy [\c_addsub_v12_0_14_lut6_legacy(c...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_fabric_legacy [\c_addsub_v12_0_14_fabric_legacy...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_legacy [\c_addsub_v12_0_14_legacy(c_fami...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_viv [\c_addsub_v12_0_14_viv(c_xdevice...]
+Compiling architecture xilinx of entity xfft_v9_1_4.adder [\adder(c_xdevicefamily="zynq",c_...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.mux_bus2 [\mux_bus2(c_xdevicefamily="zynq"...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_bf_sp [\r22_bf_sp(c_xdevicefamily="zynq...]
+Compiling architecture rtl of entity c_addsub_v12_0_14.c_addsub_v12_0_14_lut6_legacy [\c_addsub_v12_0_14_lut6_legacy(c...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_fabric_legacy [\c_addsub_v12_0_14_fabric_legacy...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_legacy [\c_addsub_v12_0_14_legacy(c_fami...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_viv [\c_addsub_v12_0_14_viv(c_xdevice...]
+Compiling architecture xilinx of entity xfft_v9_1_4.adder [\adder(c_xdevicefamily="zynq",c_...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture struct of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_legacy [\c_shift_ram_v12_0_14_legacy(c_x...]
+Compiling architecture synth of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_viv [\c_shift_ram_v12_0_14_viv(c_xdev...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_bf_sp [\r22_bf_sp(c_xdevicefamily="zynq...]
+Compiling architecture struct of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_legacy [\c_shift_ram_v12_0_14_legacy(c_x...]
+Compiling architecture synth of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_viv [\c_shift_ram_v12_0_14_viv(c_xdev...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture struct of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_legacy [\c_shift_ram_v12_0_14_legacy(c_x...]
+Compiling architecture synth of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_viv [\c_shift_ram_v12_0_14_viv(c_xdev...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture structural of entity c_reg_fd_v12_0_6.c_reg_fd_v12_0_6_viv [\c_reg_fd_v12_0_6_viv(c_width=5,...]
+Compiling architecture rtl of entity c_addsub_v12_0_14.c_addsub_v12_0_14_lut6_legacy [\c_addsub_v12_0_14_lut6_legacy(c...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_fabric_legacy [\c_addsub_v12_0_14_fabric_legacy...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_legacy [\c_addsub_v12_0_14_legacy(c_fami...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_viv [\c_addsub_v12_0_14_viv(c_xdevice...]
+Compiling architecture xilinx of entity xfft_v9_1_4.adder [\adder(c_xdevicefamily="zynq",c_...]
+Compiling architecture xilinx of entity xfft_v9_1_4.mux_bus4 [\mux_bus4(c_xdevicefamily="zynq"...]
+Compiling architecture xilinx of entity xfft_v9_1_4.twgen_distmem [\twgen_distmem(theta_width=4,pip...]
+Compiling architecture xilinx of entity xfft_v9_1_4.twiddle_gen [\twiddle_gen(c_xdevicefamily="zy...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_tw_gen [\r22_tw_gen(c_xdevicefamily="zyn...]
+Compiling architecture struct of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_legacy [\c_shift_ram_v12_0_14_legacy(c_x...]
+Compiling architecture synth of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_viv [\c_shift_ram_v12_0_14_viv(c_xdev...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_pe [\r22_pe(c_xdevicefamily="zynq",c...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_cnt_ctrl [\r22_cnt_ctrl(c_xdevicefamily="z...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_cnt_ctrl [\r22_cnt_ctrl(c_xdevicefamily="z...]
+Compiling architecture struct of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_legacy [\c_shift_ram_v12_0_14_legacy(c_x...]
+Compiling architecture synth of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_viv [\c_shift_ram_v12_0_14_viv(c_xdev...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture struct of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_legacy [\c_shift_ram_v12_0_14_legacy(c_x...]
+Compiling architecture synth of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_viv [\c_shift_ram_v12_0_14_viv(c_xdev...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture struct of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_legacy [\c_shift_ram_v12_0_14_legacy(c_x...]
+Compiling architecture synth of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_viv [\c_shift_ram_v12_0_14_viv(c_xdev...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture struct of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_legacy [\c_shift_ram_v12_0_14_legacy(c_x...]
+Compiling architecture synth of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_viv [\c_shift_ram_v12_0_14_viv(c_xdev...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture struct of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_legacy [\c_shift_ram_v12_0_14_legacy(c_x...]
+Compiling architecture synth of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_viv [\c_shift_ram_v12_0_14_viv(c_xdev...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture struct of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_legacy [\c_shift_ram_v12_0_14_legacy(c_x...]
+Compiling architecture synth of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_viv [\c_shift_ram_v12_0_14_viv(c_xdev...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture struct of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_legacy [\c_shift_ram_v12_0_14_legacy(c_x...]
+Compiling architecture synth of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_viv [\c_shift_ram_v12_0_14_viv(c_xdev...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_bf_sp [\r22_bf_sp(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_bf_sp [\r22_bf_sp(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture struct of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_legacy [\c_shift_ram_v12_0_14_legacy(c_x...]
+Compiling architecture synth of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_viv [\c_shift_ram_v12_0_14_viv(c_xdev...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture structural of entity c_reg_fd_v12_0_6.c_reg_fd_v12_0_6_viv [\c_reg_fd_v12_0_6_viv(c_width=3,...]
+Compiling architecture rtl of entity c_addsub_v12_0_14.c_addsub_v12_0_14_lut6_legacy [\c_addsub_v12_0_14_lut6_legacy(c...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_fabric_legacy [\c_addsub_v12_0_14_fabric_legacy...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_legacy [\c_addsub_v12_0_14_legacy(c_fami...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_viv [\c_addsub_v12_0_14_viv(c_xdevice...]
+Compiling architecture xilinx of entity xfft_v9_1_4.adder [\adder(c_xdevicefamily="zynq",c_...]
+Compiling architecture xilinx of entity xfft_v9_1_4.mux_bus4 [\mux_bus4(c_xdevicefamily="zynq"...]
+Compiling architecture xilinx of entity xfft_v9_1_4.twgen_distmem [\twgen_distmem(theta_width=2,pip...]
+Compiling architecture xilinx of entity xfft_v9_1_4.twiddle_gen [\twiddle_gen(c_xdevicefamily="zy...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_tw_gen [\r22_tw_gen(c_xdevicefamily="zyn...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_pe [\r22_pe(c_xdevicefamily="zynq",c...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_bf_sp [\r22_bf_sp(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.arith_shift1 [\arith_shift1(c_xdevicefamily="z...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_pe [\r22_pe(c_xdevicefamily="zynq",c...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_busy [\r22_busy(c_xdevicefamily="zynq"...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture fdre_v of entity unisim.FDRE [fdre_default]
+Compiling architecture muxcy_v of entity unisim.MUXCY [muxcy_default]
+Compiling architecture xorcy_v of entity unisim.XORCY [xorcy_default]
+Compiling architecture rtl of entity c_addsub_v12_0_14.c_addsub_v12_0_14_lut6_legacy [\c_addsub_v12_0_14_lut6_legacy(c...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_fabric_legacy [\c_addsub_v12_0_14_fabric_legacy...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_legacy [\c_addsub_v12_0_14_legacy(c_fami...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_viv [\c_addsub_v12_0_14_viv(c_xdevice...]
+Compiling architecture xilinx of entity xfft_v9_1_4.logic_gate [\logic_gate(c_xdevicefamily="zyn...]
+Compiling architecture fdse_v of entity unisim.FDSE [fdse_default]
+Compiling architecture xilinx of entity xfft_v9_1_4.cnt_sat [\cnt_sat(c_xdevicefamily="zynq",...]
+Compiling architecture rtl of entity c_addsub_v12_0_14.c_addsub_v12_0_14_lut6_legacy [\c_addsub_v12_0_14_lut6_legacy(c...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_fabric_legacy [\c_addsub_v12_0_14_fabric_legacy...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_legacy [\c_addsub_v12_0_14_legacy(c_fami...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_viv [\c_addsub_v12_0_14_viv(c_xdevice...]
+Compiling architecture xilinx of entity xfft_v9_1_4.logic_gate [\logic_gate(c_xdevicefamily="zyn...]
+Compiling architecture xilinx of entity xfft_v9_1_4.cnt_sat [\cnt_sat(c_xdevicefamily="zynq",...]
+Compiling architecture rtl of entity c_addsub_v12_0_14.c_addsub_v12_0_14_lut6_legacy [\c_addsub_v12_0_14_lut6_legacy(c...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_fabric_legacy [\c_addsub_v12_0_14_fabric_legacy...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_legacy [\c_addsub_v12_0_14_legacy(c_fami...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_viv [\c_addsub_v12_0_14_viv(c_xdevice...]
+Compiling architecture xilinx of entity xfft_v9_1_4.logic_gate [\logic_gate(c_xdevicefamily="zyn...]
+Compiling architecture xilinx of entity xfft_v9_1_4.cnt_sat [\cnt_sat(c_xdevicefamily="zynq",...]
+Compiling architecture xilinx of entity xfft_v9_1_4.logic_gate [\logic_gate(c_xdevicefamily="zyn...]
+Compiling architecture xilinx of entity xfft_v9_1_4.cnt_sat [\cnt_sat(c_xdevicefamily="zynq",...]
+Compiling architecture rtl of entity c_addsub_v12_0_14.c_addsub_v12_0_14_lut6_legacy [\c_addsub_v12_0_14_lut6_legacy(c...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_fabric_legacy [\c_addsub_v12_0_14_fabric_legacy...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_legacy [\c_addsub_v12_0_14_legacy(c_fami...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_viv [\c_addsub_v12_0_14_viv(c_xdevice...]
+Compiling architecture xilinx of entity xfft_v9_1_4.logic_gate [\logic_gate(c_xdevicefamily="zyn...]
+Compiling architecture xilinx of entity xfft_v9_1_4.cnt_sat [\cnt_sat(c_xdevicefamily="zynq",...]
+Compiling architecture rtl of entity c_addsub_v12_0_14.c_addsub_v12_0_14_lut6_legacy [\c_addsub_v12_0_14_lut6_legacy(c...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_fabric_legacy [\c_addsub_v12_0_14_fabric_legacy...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_legacy [\c_addsub_v12_0_14_legacy(c_fami...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_viv [\c_addsub_v12_0_14_viv(c_xdevice...]
+Compiling architecture xilinx of entity xfft_v9_1_4.logic_gate [\logic_gate(c_xdevicefamily="zyn...]
+Compiling architecture xilinx of entity xfft_v9_1_4.cnt_sat [\cnt_sat(c_xdevicefamily="zynq",...]
+Compiling architecture structural of entity c_reg_fd_v12_0_6.c_reg_fd_v12_0_6_viv [\c_reg_fd_v12_0_6_viv(c_width=9,...]
+Compiling architecture rtl of entity c_addsub_v12_0_14.c_addsub_v12_0_14_lut6_legacy [\c_addsub_v12_0_14_lut6_legacy(c...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_fabric_legacy [\c_addsub_v12_0_14_fabric_legacy...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_legacy [\c_addsub_v12_0_14_legacy(c_fami...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_viv [\c_addsub_v12_0_14_viv(c_xdevice...]
+Compiling architecture lut6_v of entity unisim.LUT6 [\LUT6(init="10010000000010010000...]
+Compiling architecture xilinx of entity xfft_v9_1_4.equ_rtl [\equ_rtl(c_xdevicefamily="zynq",...]
+Compiling architecture xilinx of entity xfft_v9_1_4.cnt_tc_rtl_a [\cnt_tc_rtl_a(c_xdevicefamily="z...]
+Compiling architecture struct of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_legacy [\c_shift_ram_v12_0_14_legacy(c_x...]
+Compiling architecture synth of entity c_shift_ram_v12_0_14.c_shift_ram_v12_0_14_viv [\c_shift_ram_v12_0_14_viv(c_xdev...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_flow_ctrl [\r22_flow_ctrl(c_xdevicefamily="...]
+Compiling architecture lut3_v of entity unisim.LUT3 [\LUT3(init="10101110")(0,7)\]
+Compiling architecture xilinx of entity xfft_v9_1_4.r22_cnt_ctrl [\r22_cnt_ctrl(c_xdevicefamily="z...]
+Compiling architecture srl16e_v of entity unisim.SRL16E [\SRL16E(0,15)\]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture fdr_v of entity unisim.FDR [fdr_default]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.shift_ram [\shift_ram(c_xdevicefamily="zynq...]
+Compiling architecture xilinx of entity xfft_v9_1_4.xfft_v9_1_4_d [\xfft_v9_1_4_d(c_xdevicefamily="...]
+Compiling architecture synth of entity xfft_v9_1_4.xfft_v9_1_4_core [\xfft_v9_1_4_core(c_xdevicefamil...]
+Compiling architecture synth of entity xfft_v9_1_4.xfft_v9_1_4_viv [\xfft_v9_1_4_viv(c_xdevicefamily...]
+Compiling architecture xilinx of entity xfft_v9_1_4.xfft_v9_1_4 [\xfft_v9_1_4(c_xdevicefamily="zy...]
+Compiling architecture fft_bd_xfft_0_0_arch of entity xil_defaultlib.fft_bd_xfft_0_0 [fft_bd_xfft_0_0_default]
+Compiling module xlconstant_v1_1_7.xlconstant_v1_1_7_xlconstant(CON...
+Compiling module xil_defaultlib.fft_bd_xlconstant_0_0
+Compiling module xil_defaultlib.fft_bd
+Compiling module xil_defaultlib.fft_bd_wrapper
+Compiling module xil_defaultlib.realfft_rtl_tb
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot realfft_rtl_tb_behav
+
+****** Webtalk v2020.1 (64-bit)
+  **** SW Build 2902540 on Wed May 27 19:54:49 MDT 2020
+  **** IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+source Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim/xsim.dir/realfft_rtl_tb_behav/webtalk/xsim_webtalk.tcl -notrace
+INFO: [Common 17-186] 'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim/xsim.dir/realfft_rtl_tb_behav/webtalk/usage_statistics_ext_xsim.xml' has been successfully sent to Xilinx on Wed Mar 30 13:27:41 2022. For additional details about this file, please refer to the WebTalk help file at C:/Xilinx/Vivado/2020.1/doc/webtalk_introduction.html.
+INFO: [Common 17-206] Exiting Webtalk at Wed Mar 30 13:27:41 2022...
+run_program: Time (s): cpu = 00:00:02 ; elapsed = 00:01:10 . Memory (MB): peak = 1261.449 ; gain = 0.000
+INFO: [USF-XSim-69] 'elaborate' step finished in '70' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "realfft_rtl_tb_behav -key {Behavioral:sim_1:Functional:realfft_rtl_tb} -tclbatch {realfft_rtl_tb.tcl} -protoinst "protoinst_files/fft_bd.protoinst" -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Vivado Simulator 2020.1
+INFO: [Wavedata 42-565] Reading protoinst file protoinst_files/fft_bd.protoinst
+INFO: [Wavedata 42-564]   Found protocol instance at /realfft_rtl_tb/dut0/fft_bd_i//hls_real2xfft_0/din_V_V
+INFO: [Wavedata 42-564]   Found protocol instance at /realfft_rtl_tb/dut0/fft_bd_i//hls_real2xfft_0/dout
+INFO: [Wavedata 42-564]   Found protocol instance at /realfft_rtl_tb/dut0/fft_bd_i//hls_xfft2real_0/din
+INFO: [Wavedata 42-564]   Found protocol instance at /realfft_rtl_tb/dut0/fft_bd_i//hls_xfft2real_0/dout_V
+INFO: [Wavedata 42-564]   Found protocol instance at /realfft_rtl_tb/dut0/fft_bd_i//xfft_0/M_AXIS_DATA
+INFO: [Wavedata 42-564]   Found protocol instance at /realfft_rtl_tb/dut0/fft_bd_i//xfft_0/S_AXIS_DATA
+Time resolution is 1 ps
+source realfft_rtl_tb.tcl
+# set curr_wave [current_wave_config]
+# if { [string length $curr_wave] == 0 } {
+#   if { [llength [get_objects]] > 0} {
+#     add_wave /
+#     set_property needs_save false [current_wave_config]
+#   } else {
+#      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+#   }
+# }
+# run 1000ns
+WARNING: file ../../../../verilog_tb/realfft_fe_tvin.dat could not be opened
+Could not open input test vector file. Bailing out...
+WARNING: file ../../../../verilog_tb/realfft_be_tvout.dat could not be opened
+Could not open output test vector file. Bailing out...
+Failure: ERROR:add_1 must be in range [-1,DEPTH-1]
+Time: 35 ns  Iteration: 1
+$finish called at time : 35 ns : File "Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ipshared/620a/hdl/verilog/hls_xfft2real.v" Line 380
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'realfft_rtl_tb_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1000ns
+launch_simulation: Time (s): cpu = 00:00:10 ; elapsed = 00:01:28 . Memory (MB): peak = 1283.688 ; gain = 22.238
+launch_runs impl_1 -to_step write_bitstream -jobs 2
+[Wed Mar 30 13:28:56 2022] Launched synth_1...
+Run output will be captured here: Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.runs/synth_1/runme.log
+[Wed Mar 30 13:28:56 2022] Launched impl_1...
+Run output will be captured here: Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.runs/impl_1/runme.log
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [Z:\FPGA\project\triad_finder\tom\Vivado\wav_fft\wav_fft.srcs\sim_1\imports\verilog_tb\realfft_rtl_tb.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [Z:\FPGA\project\triad_finder\tom\Vivado\wav_fft\wav_fft.srcs\sources_1\bd\fft_bd\ipshared\620a\hdl\verilog\hls_xfft2real.v:]
+copy_run -name synth_1_copy_1 [get_runs synth_1] 
+synth_1_copy_1
+set_property board_part tul.com.tw:pynq-z2:part0:1.0 [current_project]
+reset_run impl_1 -prev_step 
+launch_runs impl_1 -to_step write_bitstream -jobs 2
+[Wed Mar 30 13:55:04 2022] Launched impl_1...
+Run output will be captured here: Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.runs/impl_1/runme.log
+open_bd_design {Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/fft_bd.bd}
+validate_bd_design -force
+CRITICAL WARNING: [BD 41-759] The input pins (listed below) are either not connected or do not have a source port, and they don't have a tie-off specified. These pins are tied-off to all 0's to avoid error in Implementation flow.
+Please check your design and connect them as needed: 
+/xfft_0/s_axis_config_tvalid
+
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:processing_system7:5.5 processing_system7_0
+WARNING: [BD 41-176] The physical port 'S_AXI_GP2_rd_socket' specified in the portmap, is not found on the block! 
+WARNING: [BD 41-176] The physical port 'S_AXI_GP2_wr_socket' specified in the portmap, is not found on the block! 
+WARNING: [BD 41-176] The physical port 'S_AXI_GP3_rd_socket' specified in the portmap, is not found on the block! 
+WARNING: [BD 41-176] The physical port 'S_AXI_GP3_wr_socket' specified in the portmap, is not found on the block! 
+endgroup
+apply_bd_automation -rule xilinx.com:bd_rule:processing_system7 -config {make_external "FIXED_IO, DDR" apply_board_preset "1" Master "Disable" Slave "Disable" }  [get_bd_cells processing_system7_0]
+apply_bd_automation: Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1959.062 ; gain = 0.000
+CRITICAL WARNING: [PSU-1]  Parameter : PCW_UIPARAM_DDR_DQS_TO_CLK_DELAY_0 has negative value -0.051 . PS DDR interfaces might fail when entering negative DQS skew values. 
+CRITICAL WARNING: [PSU-2]  Parameter : PCW_UIPARAM_DDR_DQS_TO_CLK_DELAY_1 has negative value -0.006 . PS DDR interfaces might fail when entering negative DQS skew values. 
+CRITICAL WARNING: [PSU-3]  Parameter : PCW_UIPARAM_DDR_DQS_TO_CLK_DELAY_2 has negative value -0.009 . PS DDR interfaces might fail when entering negative DQS skew values. 
+CRITICAL WARNING: [PSU-4]  Parameter : PCW_UIPARAM_DDR_DQS_TO_CLK_DELAY_3 has negative value -0.033 . PS DDR interfaces might fail when entering negative DQS skew values. 
+WARNING: [IP_Flow 19-474] Invalid Parameter 'Component_Name'
+CRITICAL WARNING: [PSU-1]  Parameter : PCW_UIPARAM_DDR_DQS_TO_CLK_DELAY_0 has negative value -0.051 . PS DDR interfaces might fail when entering negative DQS skew values. 
+CRITICAL WARNING: [PSU-2]  Parameter : PCW_UIPARAM_DDR_DQS_TO_CLK_DELAY_1 has negative value -0.006 . PS DDR interfaces might fail when entering negative DQS skew values. 
+CRITICAL WARNING: [PSU-3]  Parameter : PCW_UIPARAM_DDR_DQS_TO_CLK_DELAY_2 has negative value -0.009 . PS DDR interfaces might fail when entering negative DQS skew values. 
+CRITICAL WARNING: [PSU-4]  Parameter : PCW_UIPARAM_DDR_DQS_TO_CLK_DELAY_3 has negative value -0.033 . PS DDR interfaces might fail when entering negative DQS skew values. 
+startgroup
+set_property -dict [list CONFIG.PCW_USE_S_AXI_GP0 {1}] [get_bd_cells processing_system7_0]
+CRITICAL WARNING: [PSU-1]  Parameter : PCW_UIPARAM_DDR_DQS_TO_CLK_DELAY_0 has negative value -0.051 . PS DDR interfaces might fail when entering negative DQS skew values. 
+CRITICAL WARNING: [PSU-2]  Parameter : PCW_UIPARAM_DDR_DQS_TO_CLK_DELAY_1 has negative value -0.006 . PS DDR interfaces might fail when entering negative DQS skew values. 
+CRITICAL WARNING: [PSU-3]  Parameter : PCW_UIPARAM_DDR_DQS_TO_CLK_DELAY_2 has negative value -0.009 . PS DDR interfaces might fail when entering negative DQS skew values. 
+CRITICAL WARNING: [PSU-4]  Parameter : PCW_UIPARAM_DDR_DQS_TO_CLK_DELAY_3 has negative value -0.033 . PS DDR interfaces might fail when entering negative DQS skew values. 
+WARNING: [BD 41-176] The physical port 'S_AXI_GP2_rd_socket' specified in the portmap, is not found on the block! 
+WARNING: [BD 41-176] The physical port 'S_AXI_GP2_wr_socket' specified in the portmap, is not found on the block! 
+WARNING: [BD 41-176] The physical port 'S_AXI_GP3_rd_socket' specified in the portmap, is not found on the block! 
+WARNING: [BD 41-176] The physical port 'S_AXI_GP3_wr_socket' specified in the portmap, is not found on the block! 
+endgroup
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:axi_dma:7.1 axi_dma_0
+endgroup
+set_property location {5 1400 -129} [get_bd_cells processing_system7_0]
+set_property location {4 1354 -86} [get_bd_cells processing_system7_0]
+set_property location {2 791 -94} [get_bd_cells axi_dma_0]
+set_property location {2 1156 -172} [get_bd_cells axi_dma_0]
+regenerate_bd_layout
+save_bd_design
+Wrote  : <Z:\FPGA\project\triad_finder\tom\Vivado\wav_fft\wav_fft.srcs\sources_1\bd\fft_bd\fft_bd.bd> 
+Wrote  : <Z:/FPGA/project/triad_finder/tom/Vivado/wav_fft/wav_fft.srcs/sources_1/bd/fft_bd/ui/bd_90042ead.ui> 
