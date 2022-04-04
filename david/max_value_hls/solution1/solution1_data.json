@@ -1,0 +1,478 @@
+{
+  "Top": "max",
+  "RtlTop": "max",
+  "RtlPrefix": "",
+  "SourceLanguage": "cpp",
+  "ResetStyle": "control",
+  "GenerateBdFiles": "1",
+  "HostMachineBits": "64",
+  "Target": {
+    "Family": "zynq",
+    "Device": "xc7z020",
+    "Package": "-clg400",
+    "Speed": "-1"
+  },
+  "HlsSolution": {
+    
+  },
+  "Args": {
+    "y": {
+      "index": "0",
+      "type": {
+        "kinds": [
+          "struct",
+          "pointer"
+        ],
+        "dataType": "ap_axis<16, 1, 1, 1>",
+        "structImpl": "flat-field",
+        "dataPack": true,
+        "fields": {
+          "data": {
+            "order": "0",
+            "dataType": "ap_int",
+            "dataWidth": "16",
+            "interfaceRef": "y",
+            "bitMap": "15:0",
+            "portRef": "TDATA",
+            "structImpl": "interface",
+            "dataPack": true
+          },
+          "keep": {
+            "order": "1",
+            "dataType": "ap_uint",
+            "dataWidth": "2",
+            "interfaceRef": "y",
+            "bitMap": "1:0",
+            "portRef": "TDATA",
+            "structImpl": "interface",
+            "dataPack": true
+          },
+          "strb": {
+            "order": "2",
+            "dataType": "ap_uint",
+            "dataWidth": "2",
+            "interfaceRef": "y",
+            "bitMap": "1:0",
+            "portRef": "TDATA",
+            "structImpl": "interface",
+            "dataPack": true
+          },
+          "user": {
+            "order": "3",
+            "dataType": "ap_uint",
+            "dataWidth": "1",
+            "interfaceRef": "y",
+            "bitMap": "0:0",
+            "portRef": "TDATA",
+            "structImpl": "interface",
+            "dataPack": true
+          },
+          "last": {
+            "order": "4",
+            "dataType": "ap_uint",
+            "dataWidth": "1",
+            "interfaceRef": "y",
+            "bitMap": "0:0",
+            "portRef": "TDATA",
+            "structImpl": "interface",
+            "dataPack": true
+          },
+          "id": {
+            "order": "5",
+            "dataType": "ap_uint",
+            "dataWidth": "1",
+            "interfaceRef": "y",
+            "bitMap": "0:0",
+            "portRef": "TDATA",
+            "structImpl": "interface",
+            "dataPack": true
+          },
+          "dest": {
+            "order": "6",
+            "dataType": "ap_uint",
+            "dataWidth": "1",
+            "interfaceRef": "y",
+            "bitMap": "0:0",
+            "portRef": "TDATA",
+            "structImpl": "interface",
+            "dataPack": true
+          }
+        }
+      }
+    },
+    "x": {
+      "index": "1",
+      "type": {
+        "kinds": [
+          "struct",
+          "pointer"
+        ],
+        "dataType": "ap_axis<16, 1, 1, 1>",
+        "structImpl": "flat-field",
+        "dataPack": true,
+        "fields": {
+          "data": {
+            "order": "0",
+            "dataType": "ap_int",
+            "dataWidth": "16",
+            "interfaceRef": "x",
+            "bitMap": "15:0",
+            "portRef": "TDATA",
+            "structImpl": "interface",
+            "dataPack": true
+          },
+          "keep": {
+            "order": "1",
+            "dataType": "ap_uint",
+            "dataWidth": "2",
+            "interfaceRef": "x",
+            "bitMap": "1:0",
+            "portRef": "TDATA",
+            "structImpl": "interface",
+            "dataPack": true
+          },
+          "strb": {
+            "order": "2",
+            "dataType": "ap_uint",
+            "dataWidth": "2",
+            "interfaceRef": "x",
+            "bitMap": "1:0",
+            "portRef": "TDATA",
+            "structImpl": "interface",
+            "dataPack": true
+          },
+          "user": {
+            "order": "3",
+            "dataType": "ap_uint",
+            "dataWidth": "1",
+            "interfaceRef": "x",
+            "bitMap": "0:0",
+            "portRef": "TDATA",
+            "structImpl": "interface",
+            "dataPack": true
+          },
+          "last": {
+            "order": "4",
+            "dataType": "ap_uint",
+            "dataWidth": "1",
+            "interfaceRef": "x",
+            "bitMap": "0:0",
+            "portRef": "TDATA",
+            "structImpl": "interface",
+            "dataPack": true
+          },
+          "id": {
+            "order": "5",
+            "dataType": "ap_uint",
+            "dataWidth": "1",
+            "interfaceRef": "x",
+            "bitMap": "0:0",
+            "portRef": "TDATA",
+            "structImpl": "interface",
+            "dataPack": true
+          },
+          "dest": {
+            "order": "6",
+            "dataType": "ap_uint",
+            "dataWidth": "1",
+            "interfaceRef": "x",
+            "bitMap": "0:0",
+            "portRef": "TDATA",
+            "structImpl": "interface",
+            "dataPack": true
+          }
+        }
+      }
+    }
+  },
+  "Return": {
+    
+  },
+  "ClockInfo": {
+    "ClockName": "ap_clk",
+    "ClockPeriod": "10",
+    "IsCombLogic": "0",
+    "II": "x",
+    "Latency": "1",
+    "Uncertainty": "1.25"
+  },
+  "Xdc": {"OocClocks": ["create_clock -name ap_clk -period 10.000 [get_ports ap_clk]"]},
+  "Ipx": {
+    "Vendor": "xilinx.com",
+    "Library": "hls",
+    "Name": "max",
+    "Version": "1.0",
+    "DisplayName": "Max",
+    "Revision": "",
+    "Description": "An IP generated by Vivado HLS",
+    "Taxonomy": "\/VIVADO_HLS_IP",
+    "AutoFamilySupport": ""
+  },
+  "Files": {
+    "CSource": ["..\/..\/max.cpp"],
+    "Vhdl": [
+      "impl\/vhdl\/regslice_core.vhd",
+      "impl\/vhdl\/max.vhd"
+    ],
+    "Verilog": [
+      "impl\/verilog\/regslice_core.v",
+      "impl\/verilog\/max.v"
+    ],
+    "Misc": ["impl\/misc\/logo.png"],
+    "DesignXml": "C:\/Users\/boullie.d\/Documents\/second_impl\/max_value\/solution1\/.autopilot\/db\/max.design.xml",
+    "DebugDir": "C:\/Users\/boullie.d\/Documents\/second_impl\/max_value\/solution1\/.debug",
+    "ProtoInst": ["C:\/Users\/boullie.d\/Documents\/second_impl\/max_value\/solution1\/.debug\/max.protoinst"]
+  },
+  "SubcoreInfo": {
+    "HasXpmMemory": false,
+    "HasClockedDsp": false,
+    "IP": []
+  },
+  "Interfaces": {
+    "ap_clk": {
+      "type": "clock",
+      "ctype": {"CLK": {"Type": "bool"}},
+      "bundle_name": "ap_clk",
+      "bundle_role": "default",
+      "buses": "y x",
+      "reset": "ap_rst_n"
+    },
+    "ap_rst_n": {
+      "type": "reset",
+      "polarity": "ACTIVE_LOW",
+      "ctype": {"RST": {"Type": "bool"}},
+      "bundle_name": "ap_rst_n",
+      "bundle_role": "default"
+    },
+    "x": {
+      "type": "axi4stream",
+      "mode": "slave",
+      "port_prefix": "x",
+      "has_tready": "1",
+      "ctype": {
+        "TDATA": {
+          "Type": "integer signed",
+          "Width": "16"
+        },
+        "TVALID": {"Type": "bool"},
+        "TREADY": {"Type": "bool"},
+        "TDEST": {
+          "Type": "integer unsigned",
+          "Width": "1"
+        },
+        "TKEEP": {
+          "Type": "integer unsigned",
+          "Width": "2"
+        },
+        "TSTRB": {
+          "Type": "integer unsigned",
+          "Width": "2"
+        },
+        "TUSER": {
+          "Type": "integer unsigned",
+          "Width": "1"
+        },
+        "TLAST": {
+          "Type": "integer unsigned",
+          "Width": "1"
+        },
+        "TID": {
+          "Type": "integer unsigned",
+          "Width": "1"
+        }
+      },
+      "port_width": {
+        "TDATA": "16",
+        "TDEST": "1",
+        "TID": "1",
+        "TKEEP": "2",
+        "TLAST": "1",
+        "TSTRB": "2",
+        "TUSER": "1"
+      }
+    },
+    "y": {
+      "type": "axi4stream",
+      "mode": "master",
+      "port_prefix": "y",
+      "has_tready": "1",
+      "ctype": {
+        "TDATA": {
+          "Type": "integer signed",
+          "Width": "16"
+        },
+        "TVALID": {"Type": "bool"},
+        "TREADY": {"Type": "bool"},
+        "TDEST": {
+          "Type": "integer unsigned",
+          "Width": "1"
+        },
+        "TKEEP": {
+          "Type": "integer unsigned",
+          "Width": "2"
+        },
+        "TSTRB": {
+          "Type": "integer unsigned",
+          "Width": "2"
+        },
+        "TUSER": {
+          "Type": "integer unsigned",
+          "Width": "1"
+        },
+        "TLAST": {
+          "Type": "integer unsigned",
+          "Width": "1"
+        },
+        "TID": {
+          "Type": "integer unsigned",
+          "Width": "1"
+        }
+      },
+      "port_width": {
+        "TDATA": "16",
+        "TDEST": "1",
+        "TID": "1",
+        "TKEEP": "2",
+        "TLAST": "1",
+        "TSTRB": "2",
+        "TUSER": "1"
+      }
+    }
+  },
+  "RtlPorts": {
+    "ap_clk": {
+      "dir": "in",
+      "width": "1"
+    },
+    "ap_rst_n": {
+      "dir": "in",
+      "width": "1"
+    },
+    "y_TDATA": {
+      "dir": "out",
+      "width": "16"
+    },
+    "y_TVALID": {
+      "dir": "out",
+      "width": "1"
+    },
+    "y_TREADY": {
+      "dir": "in",
+      "width": "1"
+    },
+    "y_TDEST": {
+      "dir": "out",
+      "width": "1",
+      "isVector": "true"
+    },
+    "y_TKEEP": {
+      "dir": "out",
+      "width": "2"
+    },
+    "y_TSTRB": {
+      "dir": "out",
+      "width": "2"
+    },
+    "y_TUSER": {
+      "dir": "out",
+      "width": "1",
+      "isVector": "true"
+    },
+    "y_TLAST": {
+      "dir": "out",
+      "width": "1",
+      "isVector": "true"
+    },
+    "y_TID": {
+      "dir": "out",
+      "width": "1",
+      "isVector": "true"
+    },
+    "x_TDATA": {
+      "dir": "in",
+      "width": "16"
+    },
+    "x_TVALID": {
+      "dir": "in",
+      "width": "1"
+    },
+    "x_TREADY": {
+      "dir": "out",
+      "width": "1"
+    },
+    "x_TDEST": {
+      "dir": "in",
+      "width": "1",
+      "isVector": "true"
+    },
+    "x_TKEEP": {
+      "dir": "in",
+      "width": "2"
+    },
+    "x_TSTRB": {
+      "dir": "in",
+      "width": "2"
+    },
+    "x_TUSER": {
+      "dir": "in",
+      "width": "1",
+      "isVector": "true"
+    },
+    "x_TLAST": {
+      "dir": "in",
+      "width": "1",
+      "isVector": "true"
+    },
+    "x_TID": {
+      "dir": "in",
+      "width": "1",
+      "isVector": "true"
+    }
+  },
+  "ModuleInfo": {
+    "Hierarchy": {"ModuleName": "max"},
+    "Info": {"max": {
+        "FunctionProtocol": "ap_ctrl_none",
+        "isTaskLevelControl": "1",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      }},
+    "Metrics": {"max": {
+        "Latency": {
+          "LatencyBest": "1",
+          "LatencyAvg": "1",
+          "LatencyWorst": "1",
+          "PipelineII": "2",
+          "PipelineDepth": "",
+          "PipelineType": "none"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "1.25",
+          "Estimate": "4.198"
+        },
+        "Area": {
+          "FF": "18",
+          "LUT": "61",
+          "BRAM_18K": "0",
+          "DSP48E": "0",
+          "URAM": "0"
+        }
+      }}
+  },
+  "Sdx": {
+    "Target": "none",
+    "ProfileOption": "0",
+    "ProfileType": "none",
+    "XO": "",
+    "KernelName": "max",
+    "EnableXoSwEmu": "1"
+  },
+  "GenData": {
+    "DataVersion": "0.2",
+    "Time": "2022-04-04 16:50:21 -0400",
+    "ToolName": "vivado_hls",
+    "ToolVersion": "2020.1"
+  }
+}
