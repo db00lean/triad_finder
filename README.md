@@ -15,3 +15,6 @@ This directory includes all .wav audio files used in the [jupyter_notebooks](/ju
 
 ### data
 This directory includes all data used in the [jupyter_notebooks](/jupyter_notebooks/) directory.
+
+### report
+Includes final report that documents the project implmentation

@@ -1,2 +1,2 @@
 # report
-Includes final report that documents the project implmeentation
+Includes final report that documents the project implmentation
