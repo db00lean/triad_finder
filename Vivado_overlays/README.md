@@ -1,4 +1,4 @@
-# audio_files
+# Vivado_overlays
 This directory includes all Vivado overlays used in the [jupyter_notebooks](../jupyter_notebooks/) directory.
 
 ## fft_1024
