@@ -10,7 +10,7 @@ This directory includes all Jupyter notebooks used to demonstrate the functional
 ### Vivado_overlays
 This directory includes all Vivado overlays used in the [jupyter_notebooks](/jupyter_notebooks/) directory.
 
-### audio
+### audio_files
 This directory includes all .wav audio files used in the [jupyter_notebooks](/jupyter_notebooks/) directory.
 
 ### Results
